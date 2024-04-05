@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -f /usr/src/app/tmp/pids/server.pid
+rm -f /home/rails/app/tmp/pids/server.pid
 
 bundle check || bundle install -j8
 

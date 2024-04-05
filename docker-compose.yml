@@ -30,16 +30,14 @@ services:
       retries: 3
     volumes:
       - rails_bundle:/usr/local/bundle
-      - ./api:/usr/src/app
-      - ./docker/api/entrypoint.sh:/usr/src/entrypoint.sh
+      - ./api:/home/rails/app
+      - ./docker/api/entrypoint.sh:/home/rails/entrypoint.sh
     environment:
-      PUID: 1000
-      PGID: 1000
       CORS_ORIGINS: http://localhost:5173
     depends_on:
       db:
         condition: service_healthy
-    command: /usr/src/entrypoint.sh
+    command: /home/rails/entrypoint.sh
 
 volumes:
   rails_bundle:

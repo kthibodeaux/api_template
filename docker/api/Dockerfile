@@ -3,4 +3,7 @@ FROM ruby:3.3.0
 RUN apt-get update
 RUN apt-get install -y postgresql-client
 
-WORKDIR /usr/src/app
+RUN useradd rails --create-home --shell /bin/bash
+USER rails:rails
+
+WORKDIR /home/rails/app
