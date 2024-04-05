@@ -2,6 +2,6 @@
 </script>
 
 <template lang="pug">
-main
+section.section
   p hello home view
 </template>
