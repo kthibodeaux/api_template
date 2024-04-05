@@ -21,7 +21,9 @@
     "@vue/eslint-config-prettier": "^8.0.0",
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",
+    "eslint-plugin-vue-pug": "^0.6.2",
     "prettier": "^3.0.3",
-    "vite": "^5.1.6"
+    "vite": "^5.1.6",
+    "vite-plugin-pug": "^0.3.2"
   }
 }

@@ -1,7 +1,7 @@
 <script setup>
 </script>
 
-<template>
-  <p>hello world</p>
-  <RouterView />
+<template lang="pug">
+p hello world
+RouterView
 </template>
