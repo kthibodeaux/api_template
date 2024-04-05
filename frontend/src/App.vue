@@ -16,7 +16,7 @@ const isOpen = ref(false)
         span(aria-hidden="true")
     #navbar.navbar-menu(:class="{ 'is-active': isOpen }" :key="$route.name")
       .navbar-start
-        RouterLink.navbar-item(to="/") Home
+        RouterLink.navbar-item(:to="{ name: 'home' }") Home
       .navbar-end
 
 .container
