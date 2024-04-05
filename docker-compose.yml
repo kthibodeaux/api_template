@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16.2
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      PGUSER: "postgres"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    tty: true
+    stdin_open: true
+    stop_grace_period: 1s
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "http://127.0.0.1:3000/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - rails_bundle:/usr/local/bundle
+      - ./api:/usr/src/app
+      - ./docker/api/entrypoint.sh:/usr/src/entrypoint.sh
+    environment:
+      PUID: 1000
+      PGID: 1000
+      CORS_ORIGINS: http://localhost:5173
+    depends_on:
+      db:
+        condition: service_healthy
+    command: /usr/src/entrypoint.sh
+
+volumes:
+  rails_bundle:
+  postgres_data:
