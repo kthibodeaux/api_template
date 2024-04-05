@@ -26,3 +26,5 @@ api/config/master.key
 frontend/.vite
 frontend/dist
 frontend/*.log
+
+frontend/node_modules
