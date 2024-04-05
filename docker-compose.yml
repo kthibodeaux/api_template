@@ -39,6 +39,27 @@ services:
         condition: service_healthy
     command: /home/rails/entrypoint.sh
 
+  frontend:
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: ./docker/frontend/Dockerfile
+    ports:
+      - "5173:5173"
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "http://127.0.0.1:5173" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - ./frontend:/home/node/app
+      - ./docker/frontend/entrypoint.sh:/home/node/entrypoint.sh
+    depends_on:
+      api:
+        condition: service_healthy
+    command: /home/node/entrypoint.sh
+
 volumes:
   rails_bundle:
   postgres_data:
