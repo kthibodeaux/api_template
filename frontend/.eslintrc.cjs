@@ -3,6 +3,11 @@ require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
   root: true,
+  'extends': [
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    'plugin:vue-pug/vue3-recommended'
+  ],
   'rules': {
     'strict': 0,
     'comma-dangle': ['error', 'always-multiline'],
@@ -36,14 +41,15 @@ module.exports = {
     'space-in-parens': ['error'],
     'space-infix-ops': ['error'],
     'vue/multi-word-component-names': 0,
-    'vue/max-attributes-per-line': 100
+    "vue/max-attributes-per-line": ["error", {
+      "singleline": {
+        "max": 4
+      },
+      "multiline": {
+        "max": 1
+      }
+    }]
   },
-  'extends': [
-    'plugin:vue/vue3-essential',
-    'eslint:recommended',
-    '@vue/eslint-config-prettier/skip-formatting',
-    'plugin:vue-pug/vue3-recommended'
-  ],
   parserOptions: {
     ecmaVersion: 'latest'
   }
