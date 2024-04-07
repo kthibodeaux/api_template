@@ -6,7 +6,6 @@ ruby '3.3.0'
 
 gem 'authentication-zero', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
-gem 'jsonapi-serializer', '~> 2.2'
 gem 'pg', '~> 1.5'
 gem 'pry'
 gem 'puma', '>= 5.0'
