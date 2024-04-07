@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate_by(email: params[:email], password: params[:password])
+    if (user = User.authenticate_by(email: params[:email], password: params[:password]))
       @session = user.sessions.create!
       response.set_header 'X-Session-Token', @session.signed_id
 

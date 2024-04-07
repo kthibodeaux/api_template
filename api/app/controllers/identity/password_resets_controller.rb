@@ -5,12 +5,8 @@ class Identity::PasswordResetsController < ApplicationController
 
   before_action :set_user, only: :update
 
-  def edit
-    head :no_content
-  end
-
   def create
-    if @user = User.find_by(email: params[:email], verified: true)
+    if (@user = User.find_by(email: params[:email], verified: true))
       UserMailer.with(user: @user).password_reset.deliver_later
     else
       render json: { error: "You can't reset your password until you verify your email" }, status: :bad_request

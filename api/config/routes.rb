@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  post "sign_in", to: "sessions#create"
-  post "sign_up", to: "registrations#create"
-  resources :sessions, only: [:index, :show, :destroy]
-  resource  :password, only: [:edit, :update]
+  post 'sign_in', to: 'sessions#create'
+  post 'sign_up', to: 'registrations#create'
+  resources :sessions, only: %i[index show destroy]
+  resource  :password, only: %i[edit update]
   namespace :identity do
-    resource :email,              only: [:edit, :update]
-    resource :email_verification, only: [:show, :create]
-    resource :password_reset,     only: [:new, :edit, :create, :update]
+    resource :email,              only: %i[edit update]
+    resource :email_verification, only: %i[show create]
+    resource :password_reset,     only: %i[create update]
   end
   namespace :authentications do
     resources :events, only: :index

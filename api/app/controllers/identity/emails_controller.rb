@@ -22,12 +22,9 @@ class Identity::EmailsController < ApplicationController
   end
 
   def render_show
-    if @user.email_previously_changed?
-      resend_email_verification
-      render(json: @user)
-    else
-      render json: @user
-    end
+    resend_email_verification if @user.email_previously_changed?
+
+    render json: @user
   end
 
   def resend_email_verification
