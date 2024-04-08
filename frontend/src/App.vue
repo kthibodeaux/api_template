@@ -8,7 +8,7 @@ const isOpen = ref(false)
 .container
   nav.navbar(role="navigation" aria-label="main navigation")
     .navbar-brand
-      a.navbar-item(href="/") The Dinner Planner
+      a.navbar-item(href="/") API Template App
       a.navbar-burger(role="button" data-target="navbar" @click="isOpen = !isOpen")
         span(aria-hidden="true")
         span(aria-hidden="true")
