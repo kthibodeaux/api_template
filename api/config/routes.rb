@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: proc { [404, {}, []] }
+  root to: 'roots#index'
 
   get 'health' => 'rails/health#show', as: :rails_health_check
 
