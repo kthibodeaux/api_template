@@ -42,6 +42,7 @@ services:
   frontend:
     tty: true
     stdin_open: true
+    stop_grace_period: 1s
     build:
       context: .
       dockerfile: ./docker/frontend/Dockerfile
