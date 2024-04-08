@@ -32,10 +32,5 @@ module Api
     config.api_only = true
 
     config.middleware.use ActionDispatch::Cookies
-
-    # rails_admin
-    config.middleware.use ActionDispatch::Flash
-    config.middleware.use Rack::MethodOverride
-    config.middleware.use ActionDispatch::Session::CookieStore, { key: '_api_session' }
   end
 end

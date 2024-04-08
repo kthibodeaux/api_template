@@ -7,9 +7,6 @@ Rails.application.routes.draw do
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
-  # rails_admin
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-
   post 'sign_in', to: 'sessions#create'
   post 'sign_up', to: 'registrations#create'
 
