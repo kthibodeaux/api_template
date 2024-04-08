@@ -45,6 +45,7 @@ end
 #
 #  id              :bigint           not null, primary key
 #  email           :string           not null
+#  is_admin        :boolean          default(FALSE), not null
 #  password_digest :string           not null
 #  verified        :boolean          default(FALSE), not null
 #  created_at      :datetime         not null

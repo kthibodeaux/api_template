@@ -6,6 +6,10 @@ FactoryBot.define do
     password { 'Secret1*3*5*' }
     verified { true }
 
+    trait :admin do
+      is_admin { true }
+    end
+
     trait :not_verified do
       verified { false }
     end
@@ -18,6 +22,7 @@ end
 #
 #  id              :bigint           not null, primary key
 #  email           :string           not null
+#  is_admin        :boolean          default(FALSE), not null
 #  password_digest :string           not null
 #  verified        :boolean          default(FALSE), not null
 #  created_at      :datetime         not null
