@@ -12,7 +12,7 @@ RSpec.describe 'Passwords', type: :request do
 
     context 'password challenge is correct' do
       it 'updates the password' do
-        patch password_url, params: {
+        patch identity_password_url, params: {
           password_challenge: user.password,
           password: new_password,
           password_confirmation: new_password
@@ -24,7 +24,7 @@ RSpec.describe 'Passwords', type: :request do
 
     context 'password challenge is incorrect' do
       it 'does not update the password' do
-        patch password_url, params: {
+        patch identity_password_url, params: {
           password_challenge: "#{user.password}x",
           password: new_password,
           password_confirmation: new_password

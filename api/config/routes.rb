@@ -11,12 +11,12 @@ Rails.application.routes.draw do
   post 'sign_up', to: 'registrations#create'
 
   resources :sessions, only: %i[index show destroy]
-  resource  :password, only: %i[edit update]
 
   namespace :identity do
-    resource :email,              only: %i[edit update]
+    resource :email, only: %i[edit update]
     resource :email_verification, only: %i[show create]
-    resource :password_reset,     only: %i[create update]
+    resource :password, only: %i[edit update]
+    resource :password_reset, only: %i[create update]
   end
 
   namespace :authentications do
