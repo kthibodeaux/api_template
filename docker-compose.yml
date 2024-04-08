@@ -33,6 +33,7 @@ services:
       - ./api:/home/rails/app
       - ./docker/api/entrypoint.sh:/home/rails/entrypoint.sh
     environment:
+      RESEED: ${RESEED:-false}
       FRONTEND_URL: http://localhost:30000
     depends_on:
       db:
