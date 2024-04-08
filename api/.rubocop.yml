@@ -4,3 +4,6 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: true
   SafeAutoCorrect: true
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
