@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  include ActionController::HttpAuthentication::Token::ControllerMethods
+  include ActionController::Cookies
 
   before_action :set_current_request_details
   before_action :authenticate
@@ -9,10 +9,12 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate
-    if (session_record = authenticate_with_http_token { |token, _| Session.find_signed(token) })
-      Current.session = session_record
+    session = Session.find_signed(cookies.signed[SessionsController::COOKIE_NAME])
+
+    if session
+      Current.session = session
     else
-      request_http_token_authentication
+      render json: { error: 'You must be logged in' }, status: :unauthorized
     end
   end
 

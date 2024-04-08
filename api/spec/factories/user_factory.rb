@@ -3,8 +3,12 @@
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
-    password_digest { BCrypt::Password.create('Secret1*3*5*') }
+    password { 'Secret1*3*5*' }
     verified { true }
+
+    trait :not_verified do
+      verified { false }
+    end
   end
 end
 

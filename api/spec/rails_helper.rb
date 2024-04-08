@@ -69,8 +69,11 @@ RSpec.configure do |config|
 end
 
 def sign_in_as(user)
-  params = { email: user.email, password: 'Secret1*3*5*' }
-  post(sign_in_url, params:)
-
-  response.headers['X-Session-Token']
+  post sign_in_url, params: {
+    session: {
+      email: user.email,
+      password: user.password,
+      remember_me: false
+    }
+  }
 end

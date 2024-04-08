@@ -21,7 +21,7 @@ RSpec.describe 'Password Resets', type: :request do
     end
 
     context 'email is not verified' do
-      before { user.update!(verified: false) }
+      let(:user) { FactoryBot.create(:user, :not_verified) }
       let(:email) { user.email }
 
       it 'sends a password reset email' do

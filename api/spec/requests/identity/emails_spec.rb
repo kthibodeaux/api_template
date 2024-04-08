@@ -3,7 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Emails', type: :request do
-  include_context 'user is signed in'
+  let(:user) { FactoryBot.create(:user) }
+
+  before { sign_in_as(user) }
 
   describe '#update' do
     let(:new_email) { Faker::Internet.email }
@@ -12,8 +14,8 @@ RSpec.describe 'Emails', type: :request do
       it 'updates the email' do
         patch identity_email_url, params: {
           email: new_email,
-          password_challenge: 'Secret1*3*5*'
-        }, headers: default_headers
+          password_challenge: user.password
+        }
 
         expect(response).to have_http_status(:success)
       end
@@ -23,8 +25,8 @@ RSpec.describe 'Emails', type: :request do
       it 'updates the email' do
         patch identity_email_url, params: {
           email: new_email,
-          password_challenge: 'Secret1*3'
-        }, headers: default_headers
+          password_challenge: "#{user.password}x"
+        }
 
         expect(response).to have_http_status(:unprocessable_entity)
       end

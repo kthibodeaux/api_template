@@ -3,18 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Email Verifications', type: :request do
-  include_context 'user is signed in'
-
-  before do
-    user.update!(verified: false)
-  end
+  let(:user) { FactoryBot.create(:user, :not_verified) }
 
   describe '#show' do
     let!(:sid) { user.generate_token_for(:email_verification) }
 
     context 'valid token' do
       it 'verifies the user' do
-        get identity_email_verification_url, params: { sid: }, headers: default_headers
+        get identity_email_verification_url, params: { sid: }
 
         expect(user.reload.verified?).to eq(true)
         expect(response).to have_http_status(:no_content)
@@ -25,7 +21,7 @@ RSpec.describe 'Email Verifications', type: :request do
       before { travel 3.days }
 
       it 'does not verify the user' do
-        get identity_email_verification_url, params: { sid: }, headers: default_headers
+        get identity_email_verification_url, params: { sid: }
 
         expect(user.reload.verified?).to eq(false)
         expect(response).to have_http_status(:bad_request)
@@ -34,9 +30,11 @@ RSpec.describe 'Email Verifications', type: :request do
   end
 
   describe '#create' do
+    before { sign_in_as(user) }
+
     it 'sends an email' do
       expect do
-        post identity_email_verification_url, headers: default_headers
+        post identity_email_verification_url
       end.to(
         have_enqueued_job(ActionMailer::MailDeliveryJob)
       )
