@@ -18,8 +18,4 @@ Rails.application.routes.draw do
     resource :password, only: %i[edit update]
     resource :password_reset, only: %i[create update]
   end
-
-  namespace :authentications do
-    resources :events, only: :index
-  end
 end
