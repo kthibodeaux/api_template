@@ -25,6 +25,7 @@ services:
       - "30001:3000"
     healthcheck:
       test: [ "CMD", "curl", "--fail", "http://127.0.0.1:3000/health" ]
+      start_period: 1m
       interval: 10s
       timeout: 5s
       retries: 3
