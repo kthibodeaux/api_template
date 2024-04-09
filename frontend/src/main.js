@@ -15,6 +15,8 @@ import BaseCheckbox from '@/components/base/base_checkbox.vue'
 app.component('BaseCheckbox', BaseCheckbox)
 import BaseForm from '@/components/base/base_form.vue'
 app.component('BaseForm', BaseForm)
+import BaseIcon from '@/components/base/base_icon.vue'
+app.component('BaseIcon', BaseIcon)
 import BaseInput from '@/components/base/base_input.vue'
 app.component('BaseInput', BaseInput)
 import BaseSubmitButton from '@/components/base/base_submit_button.vue'
