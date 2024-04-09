@@ -58,6 +58,8 @@ services:
     volumes:
       - ./frontend:/home/node/app
       - ./docker/frontend/entrypoint.sh:/home/node/entrypoint.sh
+    environment:
+      API_URL: http://localhost:30001
     depends_on:
       api:
         condition: service_healthy
