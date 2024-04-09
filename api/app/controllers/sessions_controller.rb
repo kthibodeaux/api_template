@@ -28,9 +28,9 @@ class SessionsController < ApplicationController
         secure: Rails.env.production?
       }
 
-      render json: { user: }, status: :created
+      render json: { session: { id: session.id }, user: }, status: :created
     else
-      render json: { error: 'That email or password is incorrect' }, status: :unauthorized
+      render json: { error: 'Invalid credentials' }, status: :unauthorized
     end
   end
 

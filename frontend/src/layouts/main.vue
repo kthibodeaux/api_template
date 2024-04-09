@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+import { useUserStore } from '@/stores/user'
 
+const user = useUserStore()
 const isOpen = ref(false)
 </script>
 
@@ -18,6 +20,8 @@ const isOpen = ref(false)
       .navbar-start
         RouterLink.navbar-item(:to="{ name: 'home' }") Home
       .navbar-end
+        a.navbar-item(href="#") {{user.state.email}}
+        a.navbar-item(@click="user.logout" href="#") Logout
 
 .container
   slot

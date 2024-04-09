@@ -1,9 +1,8 @@
 <script setup>
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-
 import GuestLayout from '@/layouts/guest.vue'
 import MainLayout from '@/layouts/main.vue'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
