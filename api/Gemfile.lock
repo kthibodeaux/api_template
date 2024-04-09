@@ -134,6 +134,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.5)
     minitest (5.22.3)
+    multi_json (1.15.0)
     mutex_m (0.2.0)
     net-imap (0.4.10)
       date
@@ -157,6 +158,9 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.3-x86_64-linux)
       racc (~> 1.4)
+    olive_branch (4.0.1)
+      multi_json
+      rails (>= 4.0)
     pg (1.5.6)
     pry (0.14.2)
       coderay (~> 1.1)
@@ -256,6 +260,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   letter_opener_web (~> 2.0)
+  olive_branch
   pg (~> 1.5)
   pry
   puma (>= 5.0)
