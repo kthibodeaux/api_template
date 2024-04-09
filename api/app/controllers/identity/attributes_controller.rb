@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Identity::EmailsController < ApplicationController
+class Identity::AttributesController < ApplicationController
   before_action :set_user
 
   def update
@@ -18,7 +18,7 @@ class Identity::EmailsController < ApplicationController
   end
 
   def user_params
-    params.permit(:email, :password_challenge).with_defaults(password_challenge: '')
+    params.permit(:email, :password, :password_confirmation, :password_challenge).with_defaults(password_challenge: '')
   end
 
   def render_show
