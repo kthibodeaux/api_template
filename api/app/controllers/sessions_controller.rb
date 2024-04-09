@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     user = User.authenticate_by(email: session_params[:email], password: session_params[:password])
 
     if user
-      session = user.sessions.create!
+      session = user.sessions.create!(expires_at: expire_time)
 
       cookies.signed[COOKIE_NAME] = {
         value: session.signed_id,
@@ -46,7 +46,13 @@ class SessionsController < ApplicationController
   end
 
   def expire_time
-    session_params.fetch(:remember_me) ? 1.year.from_now : 1.day.from_now
+    length_of_time = if session_params.fetch(:remember_me)
+                       1.year
+                     else
+                       1.day
+                     end
+
+    Time.zone.now + length_of_time
   end
 
   def session_params

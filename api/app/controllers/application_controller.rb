@@ -12,7 +12,14 @@ class ApplicationController < ActionController::API
     session = Session.find_signed(cookies.signed[SessionsController::COOKIE_NAME])
 
     if session
-      Current.session = session
+      if session.expired?
+        session.destroy
+        cookies.delete SessionsController::COOKIE_NAME
+
+        render json: { error: 'You must be logged in' }, status: :unauthorized
+      else
+        Current.session = session
+      end
     else
       render json: { error: 'You must be logged in' }, status: :unauthorized
     end
