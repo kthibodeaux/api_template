@@ -1,24 +1,23 @@
 <script setup>
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
-const isOpen = ref(false)
+import GuestLayout from '@/layouts/guest.vue'
+import MainLayout from '@/layouts/main.vue'
+
+const route = useRoute()
+
+const layouts = {
+  default: MainLayout,
+  guest: GuestLayout,
+}
+
+const layout = computed(() => {
+  return layouts[route.meta.layout || 'default']
+})
 </script>
 
 <template lang="pug">
-.container
-  nav.navbar(role="navigation" aria-label="main navigation")
-    .navbar-brand
-      a.navbar-item(href="/") API Template App
-      a.navbar-burger(role="button" data-target="navbar" @click="isOpen = !isOpen")
-        span(aria-hidden="true")
-        span(aria-hidden="true")
-        span(aria-hidden="true")
-        span(aria-hidden="true")
-    #navbar.navbar-menu(:class="{ 'is-active': isOpen }" :key="$route.name")
-      .navbar-start
-        RouterLink.navbar-item(:to="{ name: 'home' }") Home
-      .navbar-end
-
-.container
+Component(:is="layout")
   RouterView
 </template>
