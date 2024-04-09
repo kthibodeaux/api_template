@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
   USER_FIELDS = %i[email is_admin]
 
   skip_before_action :authenticate, only: :create
+  skip_after_action :verify_authorized, only: :create
 
   before_action :set_session, only: %i[show destroy]
 
@@ -21,7 +22,8 @@ class SessionsController < ApplicationController
     user = User.authenticate_by(email: session_params[:email], password: session_params[:password])
 
     if user
-      session = user.sessions.create!(expires_at: expire_time)
+      session = authorize Session.new(user:, expires_at: expire_time)
+      session.save!
 
       cookies.signed[COOKIE_NAME] = {
         value: session.signed_id,
@@ -47,7 +49,7 @@ class SessionsController < ApplicationController
   private
 
   def set_session
-    @session = Current.user.sessions.find(params[:id])
+    @session = authorize Current.user.sessions.find(params[:id])
   end
 
   def expire_time
