@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class RegistrationsController < ApplicationController
-  skip_before_action :authenticate
+  skip_before_action :authenticate, only: :create
+  skip_after_action :verify_authorized, only: :create
 
   def create
     @user = User.new(user_params)

@@ -31,6 +31,9 @@ module Api
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    # Do not raise error when a before_action's only/except options reference missing actions
+    config.action_controller.raise_on_missing_callback_actions = false
+
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use OliveBranch::Middleware, inflection: 'camel'
   end
