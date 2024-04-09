@@ -3,6 +3,6 @@
 
 <template lang="pug">
 section.section
-  p hello home view
-  RouterLink(:to="{ name: 'login' }") login
+  p hello login
+  RouterLink(:to="{ name: 'home' }") home
 </template>
