@@ -1,12 +1,27 @@
 <script setup>
+import router from '@/router'
 import { ref } from 'vue'
+import { useUserStore } from '@/stores/user'
 
 const email = ref('')
 const password = ref('')
 const rememberMe = ref(false)
 const error = ref(null)
 
+const user = useUserStore()
+
 const login = () => {
+  user.login({
+    email: email.value,
+    password: password.value,
+    rememberMe: rememberMe.value,
+  })
+    .then(() => {
+      router.push('/')
+    })
+    .catch((errorMessage) => {
+      error.value = errorMessage
+    })
 }
 </script>
 

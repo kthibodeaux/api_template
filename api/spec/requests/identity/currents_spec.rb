@@ -15,7 +15,7 @@ RSpec.describe 'Email Verifications', type: :request do
       it 'sends the user info' do
         get identity_current_url
 
-        expect(body.fetch('id')).to eq(user.id)
+        expect(body.dig('user', 'id')).to eq(user.id)
         expect(response).to have_http_status(:success)
       end
     end
