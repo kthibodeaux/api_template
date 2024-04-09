@@ -7,22 +7,23 @@ const isOpen = ref(false)
 </script>
 
 <template lang="pug">
-.container
-  nav.navbar(role="navigation" aria-label="main navigation")
-    .navbar-brand
-      a.navbar-item(href="/") API Template App
-      a.navbar-burger(role="button" data-target="navbar" @click="isOpen = !isOpen")
-        span(aria-hidden="true")
-        span(aria-hidden="true")
-        span(aria-hidden="true")
-        span(aria-hidden="true")
-    #navbar.navbar-menu(:class="{ 'is-active': isOpen }" :key="$route.name")
-      .navbar-start
-        RouterLink.navbar-item(:to="{ name: 'home' }") Home
-      .navbar-end
-        a.navbar-item(href="#") {{user.state.email}}
-        a.navbar-item(@click="user.logout" href="#") Logout
+template(v-if="user.isLoggedIn")
+  .container
+    nav.navbar(role="navigation" aria-label="main navigation")
+      .navbar-brand
+        a.navbar-item(href="/") API Template App
+        a.navbar-burger(role="button" data-target="navbar" @click="isOpen = !isOpen")
+          span(aria-hidden="true")
+          span(aria-hidden="true")
+          span(aria-hidden="true")
+          span(aria-hidden="true")
+      #navbar.navbar-menu(:class="{ 'is-active': isOpen }" :key="$route.name")
+        .navbar-start
+          RouterLink.navbar-item(:to="{ name: 'home' }") Home
+        .navbar-end
+          a.navbar-item(href="#") {{user.state.email}}
+          a.navbar-item(@click="user.logout" href="#") Logout
 
-.container
-  slot
+  .container
+    slot
 </template>
