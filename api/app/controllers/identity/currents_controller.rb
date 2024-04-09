@@ -3,8 +3,8 @@
 class Identity::CurrentsController < ApplicationController
   def show
     render json: {
-      session: { id: Current.session.id },
-      user: Current.user
+      session: Current.session.as_json(only: SessionsController::SESSION_FIELDS),
+      user: Current.user.as_json(only: SessionsController::USER_FIELDS)
     }
   end
 end
