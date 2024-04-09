@@ -37,7 +37,7 @@ const handleBeforeEach = function({ to, next, user }) {
 router.beforeEach((to, from, next) => {
   const user = useUserStore()
 
-  if (user.state.id === null) {
+  if (!user.isLoggedIn) {
     user
       .initialize()
       .finally(() => handleBeforeEach({ to, from, next, user }))

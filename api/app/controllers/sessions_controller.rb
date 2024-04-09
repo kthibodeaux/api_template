@@ -2,6 +2,8 @@
 
 class SessionsController < ApplicationController
   COOKIE_NAME = :session_id
+  SESSION_FIELDS = %i[id]
+  USER_FIELDS = %i[email is_admin]
 
   skip_before_action :authenticate, only: :create
 
@@ -28,7 +30,10 @@ class SessionsController < ApplicationController
         secure: Rails.env.production?
       }
 
-      render json: { session: { id: session.id }, user: }, status: :created
+      render json: {
+        session: session.as_json(only: SESSION_FIELDS),
+        user: user.as_json(only: USER_FIELDS)
+      }, status: :created
     else
       render json: { error: 'Invalid credentials' }, status: :unauthorized
     end

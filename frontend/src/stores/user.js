@@ -1,6 +1,5 @@
 import axios from '@/lib/axios'
 import endpoints from '@/lib/endpoints'
-import router from '@/router'
 import runQuery from '@/lib/run_query'
 import { computed } from 'vue'
 import { defineStore } from 'pinia'
@@ -9,7 +8,6 @@ import { ref } from 'vue'
 const defaultState = function() {
   return {
     email: ref(null),
-    id: ref(null),
     isAdmin: ref(false),
     sessionId: ref(null),
   }
@@ -20,7 +18,6 @@ export const useUserStore = defineStore('userStore', () => {
 
   function setState(data) {
     state.value.email = data.user.email
-    state.value.id = data.user.id
     state.value.isAdmin = data.user.isAdmin
     state.value.sessionId = data.session.id
   }
@@ -64,7 +61,7 @@ export const useUserStore = defineStore('userStore', () => {
   }
 
   const isLoggedIn = computed(() => {
-    return !!state.value.id
+    return !!state.value.sessionId
   })
 
   return {
