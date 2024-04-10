@@ -41,7 +41,6 @@ section.section
           v-model="password"
           type="password"
           left-icon="lock"
-          is-sensitive
           is-required
         ) Password
         BaseCheckbox(v-model="rememberMe") Remember Me
