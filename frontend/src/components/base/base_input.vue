@@ -5,7 +5,6 @@ const text = defineModel()
 
 const props = defineProps({
   isRequired: { type: Boolean, default: false },
-  isSensitive: { type: Boolean, default: false },
   leftIcon: { type: String, default: null },
   type: { type: String, default: 'text' },
 })
