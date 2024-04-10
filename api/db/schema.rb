@@ -10,32 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_10_204858) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_10_210546) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "events", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "action", null: false
     t.string "user_agent"
     t.string "ip_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
-  create_table "sessions", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "user_agent"
     t.string "ip_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "expires_at", precision: nil, null: false
+    t.uuid "user_id", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
     t.boolean "verified", default: false, null: false
@@ -45,6 +45,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_204858) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "events", "users"
-  add_foreign_key "sessions", "users"
+  add_foreign_key "events", "users", on_delete: :cascade
+  add_foreign_key "sessions", "users", on_delete: :cascade
 end
