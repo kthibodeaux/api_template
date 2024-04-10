@@ -31,8 +31,19 @@ section.section
     .column.is-half
       h1.title.has-text-centered Login
       BaseForm(@submit="login" :error="error")
-        BaseInput(v-model="email" left-icon="mail" is-required) Email Address
-        BaseInput(v-model="password" left-icon="lock" is-sensitive is-required) Password
+        BaseInput(
+          v-model="email"
+          type="email"
+          left-icon="mail"
+          is-required
+        ) Email Address
+        BaseInput(
+          v-model="password"
+          type="password"
+          left-icon="lock"
+          is-sensitive
+          is-required
+        ) Password
         BaseCheckbox(v-model="rememberMe") Remember Me
         BaseSubmitButton Login
 </template>

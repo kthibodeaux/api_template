@@ -7,10 +7,7 @@ const props = defineProps({
   isRequired: { type: Boolean, default: false },
   isSensitive: { type: Boolean, default: false },
   leftIcon: { type: String, default: null },
-})
-
-const inputType = computed(() => {
-  return props.isSensitive ? 'password' : 'text'
+  type: { type: String, default: 'text' },
 })
 
 const additionalClasses = computed(() => {
@@ -27,7 +24,7 @@ const additionalClasses = computed(() => {
   .control(:class="additionalClasses")
     input.input(
       :required="isRequired"
-      :type="inputType"
+      :type="type"
       v-model="text"
     )
     span.icon.is-small.is-left(v-if="leftIcon")
