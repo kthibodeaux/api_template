@@ -1,6 +1,7 @@
 import { computed, ref } from 'vue'
 
 export default function({ validationErrorMessage } = {}) {
+  const errorMessage = ref(null)
   const isTouched = ref(false)
   const isValid = ref(false)
 
@@ -19,10 +20,12 @@ export default function({ validationErrorMessage } = {}) {
       }
     }
 
+    errorMessage.value = event.srcElement.validationMessage
     isValid.value = event.srcElement.validity.valid
   }
 
   return {
+    errorMessage,
     showError,
     updateValidity,
   }

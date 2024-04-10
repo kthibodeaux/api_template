@@ -16,7 +16,7 @@ const additionalClasses = computed(() => {
   }
 })
 
-const { showError, updateValidity } = useValidation()
+const { errorMessage, showError, updateValidity } = useValidation()
 </script>
 
 <template lang="pug">
@@ -34,4 +34,5 @@ const { showError, updateValidity } = useValidation()
     )
     span.icon.is-small.is-left(v-if="leftIcon")
       BaseIcon(:icon="leftIcon")
+  p.help.is-danger(v-if="errorMessage") {{errorMessage}}
 </template>
