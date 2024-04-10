@@ -27,5 +27,5 @@ end
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id) ON DELETE => cascade
+#  fk_rails_...  (user_id => users.id)
 #
