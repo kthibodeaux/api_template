@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import useValidation from '@/lib/validation'
 
 const text = defineModel()
 
@@ -14,6 +15,8 @@ const additionalClasses = computed(() => {
     'has-icons-left': props.leftIcon,
   }
 })
+
+const { showError, updateValidity } = useValidation()
 </script>
 
 <template lang="pug">
@@ -22,6 +25,9 @@ const additionalClasses = computed(() => {
     slot
   .control(:class="additionalClasses")
     input.input(
+      @focus="updateValidity"
+      @input="updateValidity"
+      :class="{ 'is-danger': showError }"
       :required="isRequired"
       :type="type"
       v-model="text"
