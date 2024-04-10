@@ -34,7 +34,10 @@ module Api
     # Do not raise error when a before_action's only/except options reference missing actions
     config.action_controller.raise_on_missing_callback_actions = false
 
+    # Allow controllers to use cookies
     config.middleware.use ActionDispatch::Cookies
+
+    # Automatically convert JSON between snake_case and camelCase
     config.middleware.use OliveBranch::Middleware, inflection: 'camel'
   end
 end
