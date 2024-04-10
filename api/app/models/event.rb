@@ -13,13 +13,13 @@ end
 #
 # Table name: events
 #
-#  id         :bigint           not null, primary key
+#  id         :uuid             not null, primary key
 #  action     :string           not null
 #  ip_address :string
 #  user_agent :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  user_id    :uuid             not null
 #
 # Indexes
 #
@@ -27,5 +27,5 @@ end
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (user_id => users.id) ON DELETE => cascade
 #
