@@ -1,7 +1,6 @@
 import axios from 'axios'
 import endpoints from './endpoints'
 import router from '@/router'
-import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 
 const myAxios = axios.create({
