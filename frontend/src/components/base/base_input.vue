@@ -19,7 +19,7 @@ const additionalClasses = {
 
 const inputField = ref(null)
 watch(validationWatch, () => {
-  updateValidity(inputField.value)
+  updateValidity({ srcElement: inputField.value })
 })
 
 const { errorMessage, showError, updateValidity } = useValidation({

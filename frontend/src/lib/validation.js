@@ -9,17 +9,16 @@ export default function({ validationFunction } = {}) {
     return isTouched.value && !isValid.value
   })
 
-  const updateValidity = (incoming) => {
+  const updateValidity = (event) => {
     isTouched.value = true
-    const srcElement = incoming.srcElement ? incoming.srcElement : incoming
 
     if (validationFunction) {
       const result = validationFunction()
 
       if (result) {
-        srcElement.setCustomValidity(result)
+        event.srcElement.setCustomValidity(result)
       } else {
-        srcElement.setCustomValidity('')
+        event.srcElement.setCustomValidity('')
       }
     }
 
