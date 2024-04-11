@@ -52,6 +52,7 @@ router.beforeEach((to, from, next) => {
   if (!user.isLoggedIn) {
     user
       .initialize()
+      .catch(() => { })
       .finally(() => handleBeforeEach({ to, from, next, user }))
   } else {
     handleBeforeEach({ to, from, next, user })
