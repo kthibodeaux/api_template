@@ -1,4 +1,7 @@
 <script setup>
+import router from '@/router'
+import endpoints from '@/lib/endpoints'
+import runMutation from '@/lib/run_mutation'
 import { ref } from 'vue'
 
 const email = ref('')
@@ -11,6 +14,25 @@ const passwordValidation = () => {
     return 'Passwords do not match'
   }
 }
+
+const signup = () => {
+  runMutation({
+    endpoint: endpoints.users.register,
+    data: {
+      user: {
+        email: email.value,
+        password: password.value,
+        passwordConfirmation: passwordConfirmation.value,
+      },
+    },
+  })
+    .then(() => {
+      router.push('/registered')
+    })
+    .catch(errors => {
+      error.value = errors.join()
+    })
+}
 </script>
 
 <template lang="pug">
@@ -18,7 +40,7 @@ section.section
   .columns.is-centered
     .column.is-half
       h1.title.has-text-centered Sign Up
-      BaseForm(@submit="login" :error="error")
+      BaseForm(@submit="signup" :error="error")
         BaseInput(
           v-model="email"
           type="email"
