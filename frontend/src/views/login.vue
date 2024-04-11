@@ -45,4 +45,7 @@ section.section
         ) Password
         BaseCheckbox(v-model="rememberMe") Remember Me
         BaseSubmitButton Login
+      hr
+      RouterLink(:to="{ name: 'sign_up' }")
+        BaseButton(link fullwidth) Sign Up
 </template>

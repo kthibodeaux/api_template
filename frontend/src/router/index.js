@@ -16,6 +16,12 @@ const router = createRouter({
       component: () => import('@/views/login.vue'),
       meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
     },
+    {
+      path: '/sign_up',
+      name: 'sign_up',
+      component: () => import('@/views/sign_up.vue'),
+      meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
+    },
   ],
 })
 
