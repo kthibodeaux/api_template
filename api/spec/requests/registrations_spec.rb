@@ -8,7 +8,7 @@ RSpec.describe 'Registrations', type: :request do
     let(:password) { 'Secret1*3*5*' }
     let(:password_confirmation) { password }
     let(:params) do
-      { email:, password:, password_confirmation: }
+      { user: { email:, password:, password_confirmation: } }
     end
 
     context 'passwords match' do
