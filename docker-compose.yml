@@ -41,6 +41,28 @@ services:
         condition: service_healthy
     command: /home/rails/entrypoint.sh
 
+  worker:
+    tty: true
+    stdin_open: true
+    stop_grace_period: 1s
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "http://127.0.0.1:7001/status" ]
+      start_period: 1m
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - rails_bundle:/usr/local/bundle
+      - ./api:/home/rails/app
+      - ./docker/api/entrypoint-worker.sh:/home/rails/entrypoint.sh
+    depends_on:
+      api:
+        condition: service_healthy
+    command: /home/rails/entrypoint.sh
+
   frontend:
     tty: true
     stdin_open: true

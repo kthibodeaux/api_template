@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get 'health' => 'rails/health#show', as: :rails_health_check
 
+  mount GoodJob::Engine => 'good_job'
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   post 'sign_in', to: 'sessions#create'
