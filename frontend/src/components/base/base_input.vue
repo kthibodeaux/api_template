@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import useValidation from '@/lib/validation'
 
 const text = defineModel()
@@ -13,11 +13,9 @@ const props = defineProps({
   validation: { type: Function, default: null },
 })
 
-const additionalClasses = computed(() => {
-  return {
-    'has-icons-left': props.leftIcon,
-  }
-})
+const additionalClasses = {
+  'has-icons-left': props.leftIcon,
+}
 
 const inputField = ref(null)
 watch(validationWatch, () => {
