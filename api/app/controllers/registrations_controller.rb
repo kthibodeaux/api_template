@@ -9,7 +9,7 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       send_email_verification
-      head :created
+      render json: { user: @user.as_json(only: :id) }, status: :created
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end

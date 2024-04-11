@@ -38,8 +38,11 @@ class SessionsController < ApplicationController
           user: user.as_json(only: USER_FIELDS)
         }, status: :created
       else
-        render json: { errors: ['You must verify your email address before logging in. Check your email for a verification link.'] },
-               status: :unauthorized
+        render json: {
+          user: user.as_json(only: :id),
+          error_id: 'not_verified',
+          errors: ['You must verify your email address before logging in. Check your email for a verification link.']
+        }, status: :ok
       end
     else
       render json: { errors: ['Invalid credentials'] }, status: :unauthorized

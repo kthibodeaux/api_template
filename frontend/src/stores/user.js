@@ -44,8 +44,10 @@ export const useUserStore = defineStore('userStore', () => {
         data: { session: credentials },
       })
         .then(data => {
-          setState(data)
-          resolve()
+          if (data.session) {
+            setState(data)
+          }
+          resolve(data)
         })
         .catch(errors => {
           reject(errors)

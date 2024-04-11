@@ -16,10 +16,14 @@ const login = () => {
     password: password.value,
     rememberMe: rememberMe.value,
   })
-    .then(() => {
-      router.push('/')
+    .then(data => {
+      if (data?.session) {
+        router.push('/')
+      } else if (data.errorId === 'not_verified') {
+        router.push({ name: 'registered', params: { userId: data.user.id } })
+      }
     })
-    .catch((errors) => {
+    .catch(errors => {
       error.value = errors.join()
     })
 }

@@ -70,7 +70,7 @@ RSpec.describe 'Sessions', type: :request do
         it 'signs in' do
           post(sign_in_url, params:)
 
-          expect(response).to have_http_status(:unauthorized)
+          expect(response).to have_http_status(:ok)
         end
       end
     end

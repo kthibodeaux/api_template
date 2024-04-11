@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Email Verifications', type: :request do
-  let(:user) { FactoryBot.create(:user, :not_verified) }
+RSpec.describe 'Current user', type: :request do
+  let(:user) { FactoryBot.create(:user) }
 
   describe '#show' do
     let!(:sid) { user.generate_token_for(:email_verification) }

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Identity::EmailVerificationsController < ApplicationController
-  skip_before_action :authenticate, only: :show
+  skip_before_action :authenticate
   skip_after_action :verify_authorized
 
-  before_action :set_user, only: :show
+  before_action :set_user
 
   def show
     @user.update!(verified: true)
@@ -12,7 +12,7 @@ class Identity::EmailVerificationsController < ApplicationController
   end
 
   def create
-    UserMailer.with(user: Current.user).email_verification.deliver_later
+    UserMailer.with(user: @user).email_verification.deliver_later
   end
 
   private

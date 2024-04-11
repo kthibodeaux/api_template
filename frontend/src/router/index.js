@@ -23,9 +23,10 @@ const router = createRouter({
       meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
     },
     {
-      path: '/registered',
+      path: '/registered/:userId',
       name: 'registered',
       component: () => import('@/views/registered.vue'),
+      props: true,
       meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
     },
   ],
