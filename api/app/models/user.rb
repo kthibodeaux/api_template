@@ -37,6 +37,10 @@ class User < ApplicationRecord
   after_update if: %i[verified_previously_changed? verified?] do
     events.create! action: 'email_verified'
   end
+
+  def admin?
+    !!is_admin
+  end
 end
 
 # == Schema Information
