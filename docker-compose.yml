@@ -58,6 +58,8 @@ services:
       - rails_bundle:/usr/local/bundle
       - ./api:/home/rails/app
       - ./docker/api/entrypoint-worker.sh:/home/rails/entrypoint.sh
+    environment:
+      FRONTEND_URL: http://localhost:30000
     depends_on:
       api:
         condition: service_healthy
