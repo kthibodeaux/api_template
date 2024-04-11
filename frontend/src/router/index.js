@@ -29,6 +29,13 @@ const router = createRouter({
       props: true,
       meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
     },
+    {
+      path: '/verify/:token',
+      name: 'verify',
+      component: () => import('@/views/verify.vue'),
+      props: true,
+      meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
+    },
   ],
 })
 
