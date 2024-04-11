@@ -4,6 +4,8 @@ import { useUserStore } from '@/stores/user'
 
 const user = useUserStore()
 const isOpen = ref(false)
+
+const goodJobUrl = `${process.env.API_URL}/good_job`
 </script>
 
 <template lang="pug">
@@ -21,8 +23,15 @@ template(v-if="user.isLoggedIn")
         .navbar-start
           RouterLink.navbar-item(:to="{ name: 'home' }") Home
         .navbar-end
-          a.navbar-item(href="#") {{user.state.email}}
-          a.navbar-item(@click="user.logout" href="#") Logout
+          .navbar-item.has-dropdown.is-hoverable
+            a.navbar-link {{user.state.email}}
+            .navbar-dropdown
+              template(v-if="user.state.isAdmin")
+                a.navbar-item(:href="goodJobUrl")
+                  | GoodJob
+                  BaseIcon(icon="thumbs-up" left-padded)
+                hr.navbar-divider
+              a.navbar-item(@click="user.logout" href="#") Logout
 
   .container
     slot
