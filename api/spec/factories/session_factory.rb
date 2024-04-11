@@ -4,6 +4,10 @@ FactoryBot.define do
   factory :session do
     user
     expires_at { Time.zone.now + 1.day }
+
+    trait :expired do
+      expires_at { Time.zone.now - 1.day }
+    end
   end
 end
 
