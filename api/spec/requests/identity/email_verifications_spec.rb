@@ -31,12 +31,12 @@ RSpec.describe 'Email Verifications', type: :request do
   describe '#create' do
     it 'sends an email' do
       expect do
-        post identity_email_verification_url, params: { sid: }
+        post identity_email_verification_url, params: { uid: user.id }
       end.to(
         have_enqueued_job(ActionMailer::MailDeliveryJob)
       )
 
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:created)
     end
   end
 end
