@@ -1,13 +1,16 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import useValidation from '@/lib/validation'
 
 const text = defineModel()
+const validationWatch = defineModel('validationWatch')
 
 const props = defineProps({
   isRequired: { type: Boolean, default: false },
+  minlength: { type: String, default: null },
   leftIcon: { type: String, default: null },
   type: { type: String, default: 'text' },
+  validation: { type: Function, default: null },
 })
 
 const additionalClasses = computed(() => {
@@ -16,7 +19,14 @@ const additionalClasses = computed(() => {
   }
 })
 
-const { errorMessage, showError, updateValidity } = useValidation()
+const inputField = ref(null)
+watch(validationWatch, () => {
+  updateValidity(inputField.value)
+})
+
+const { errorMessage, showError, updateValidity } = useValidation({
+  validationFunction: props.validation,
+})
 </script>
 
 <template lang="pug">
@@ -28,8 +38,10 @@ const { errorMessage, showError, updateValidity } = useValidation()
       @focus="updateValidity"
       @input="updateValidity"
       :class="{ 'is-danger': showError }"
+      :minlength="minlength"
       :required="isRequired"
       :type="type"
+      ref="inputField"
       v-model="text"
     )
     span.icon.is-small.is-left(v-if="leftIcon")

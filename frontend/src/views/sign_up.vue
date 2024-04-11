@@ -5,6 +5,12 @@ const email = ref('')
 const password = ref('')
 const passwordConfirmation = ref('')
 const error = ref(null)
+
+const passwordValidation = () => {
+  if (password.value !== passwordConfirmation.value) {
+    return 'Passwords do not match'
+  }
+}
 </script>
 
 <template lang="pug">
@@ -24,12 +30,18 @@ section.section
           type="password"
           left-icon="lock"
           is-required
+          minlength="12"
+          :validation="passwordValidation"
+          v-model:validationWatch="passwordConfirmation"
         ) Password
         BaseInput(
           v-model="passwordConfirmation"
           type="password"
           left-icon="lock"
           is-required
+          minlength="12"
+          :validation="passwordValidation"
+          v-model:validationWatch="password"
         ) Password Confirmation
         BaseSubmitButton Sign Up
       hr
