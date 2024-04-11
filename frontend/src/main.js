@@ -11,6 +11,8 @@ app.use(pinia)
 import router from './router'
 app.use(router)
 
+import BaseButton from '@/components/base/base_button.vue'
+app.component('BaseButton', BaseButton)
 import BaseCheckbox from '@/components/base/base_checkbox.vue'
 app.component('BaseCheckbox', BaseCheckbox)
 import BaseForm from '@/components/base/base_form.vue'
