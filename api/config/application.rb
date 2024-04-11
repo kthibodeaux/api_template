@@ -51,6 +51,13 @@ module Api
     config.middleware.use ActionDispatch::Session::CookieStore
     ## Scheduled jobs
     config.good_job.enable_cron = true
-    config.good_job.cron = {}
+    config.good_job.cron = {
+      destroy_expired_sessions: {
+        cron: '0 0 * * *',
+        class: 'DestroyExpiredSessionsJob',
+        set: { priority: -10 },
+        description: 'Deletes all expired sessions'
+      }
+    }
   end
 end
