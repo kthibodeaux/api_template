@@ -27,7 +27,7 @@ const signup = () => {
     },
   })
     .then(data => {
-      router.push({ name: 'registered', params: { userId: data.user.id } })
+      router.push({ name: 'not_verified', params: { userId: data.user.id } })
     })
     .catch(errors => {
       error.value = errors.join()

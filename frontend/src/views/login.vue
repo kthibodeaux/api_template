@@ -20,7 +20,7 @@ const login = () => {
       if (data?.session) {
         router.push('/')
       } else if (data.errorId === 'not_verified') {
-        router.push({ name: 'registered', params: { userId: data.user.id } })
+        router.push({ name: 'not_verified', params: { userId: data.user.id } })
       }
     })
     .catch(errors => {
