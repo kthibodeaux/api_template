@@ -6,7 +6,11 @@ export default function({ method = 'post', endpoint, data }) {
       axios
         .post(endpoint, data)
         .then(response => {
-          resolve(response.data)
+          if (response.data) {
+            resolve(response.data)
+          } else {
+            resolve()
+          }
         })
         .catch(error => {
           reject(error.response.data.errors)
@@ -15,7 +19,11 @@ export default function({ method = 'post', endpoint, data }) {
       axios
         .delete(endpoint)
         .then((response) => {
-          resolve(response.data)
+          if (response.data) {
+            resolve(response.data)
+          } else {
+            resolve()
+          }
         })
         .catch((error) => {
           reject(error.response.data.errors)

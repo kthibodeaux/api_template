@@ -22,22 +22,30 @@ class SessionsController < ApplicationController
     user = User.authenticate_by(email: session_params[:email], password: session_params[:password])
 
     if user
-      session = authorize Session.new(user:, expires_at: expire_time)
-      session.save!
+      if user.verified?
+        session = authorize Session.new(user:, expires_at: expire_time)
+        session.save!
 
-      cookies.signed[COOKIE_NAME] = {
-        value: session.signed_id,
-        expires: expire_time,
-        httponly: true,
-        secure: Rails.env.production?
-      }
+        cookies.signed[COOKIE_NAME] = {
+          value: session.signed_id,
+          expires: expire_time,
+          httponly: true,
+          secure: Rails.env.production?
+        }
 
-      render json: {
-        session: session.as_json(only: SESSION_FIELDS),
-        user: user.as_json(only: USER_FIELDS)
-      }, status: :created
+        render json: {
+          session: session.as_json(only: SESSION_FIELDS),
+          user: user.as_json(only: USER_FIELDS)
+        }, status: :created
+      else
+        render json: {
+          user: user.as_json(only: :id),
+          error_id: 'not_verified',
+          errors: ['You must verify your email address before logging in. Check your email for a verification link.']
+        }, status: :ok
+      end
     else
-      render json: { error: 'Invalid credentials' }, status: :unauthorized
+      render json: { errors: ['Invalid credentials'] }, status: :unauthorized
     end
   end
 

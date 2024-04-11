@@ -1,25 +1,28 @@
 # frozen_string_literal: true
 
 class Identity::EmailVerificationsController < ApplicationController
-  skip_before_action :authenticate, only: :show
+  skip_before_action :authenticate
   skip_after_action :verify_authorized
 
-  before_action :set_user, only: :show
-
   def show
-    @user.update!(verified: true)
-    head(:no_content)
+    user = User.find_by_token_for(:email_verification, params[:sid])
+
+    if user
+      user.update!(verified: true)
+      head :no_content
+    else
+      render json: { errors: ['That email verification link is invalid'] }, status: :bad_request
+    end
   end
 
   def create
-    UserMailer.with(user: Current.user).email_verification.deliver_later
-  end
+    user = User.find(params[:uid])
 
-  private
-
-  def set_user
-    @user = User.find_by_token_for!(:email_verification, params[:sid])
-  rescue StandardError
-    render json: { error: 'That email verification link is invalid' }, status: :bad_request
+    if !user.verified
+      UserMailer.with(user:).email_verification.deliver_later
+      head :created
+    else
+      head :bad_request
+    end
   end
 end

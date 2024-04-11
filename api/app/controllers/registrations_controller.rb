@@ -9,16 +9,16 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       send_email_verification
-      render json: @user, status: :created
+      render json: { user: @user.as_json(only: :id) }, status: :created
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   private
 
   def user_params
-    params.permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 
   def send_email_verification

@@ -4,6 +4,6 @@
 <template lang="pug">
 .field
   .control
-    button.button.is-primary.is-fullwidth(type="submit")
+    BaseButton(primary fullwidth submit)
       slot
 </template>

@@ -16,11 +16,15 @@ const login = () => {
     password: password.value,
     rememberMe: rememberMe.value,
   })
-    .then(() => {
-      router.push('/')
+    .then(data => {
+      if (data?.session) {
+        router.push('/')
+      } else if (data.errorId === 'not_verified') {
+        router.push({ name: 'not_verified', params: { userId: data.user.id } })
+      }
     })
-    .catch((errorMessage) => {
-      error.value = errorMessage
+    .catch(errors => {
+      error.value = errors.join()
     })
 }
 </script>
@@ -45,4 +49,7 @@ section.section
         ) Password
         BaseCheckbox(v-model="rememberMe") Remember Me
         BaseSubmitButton Login
+      hr
+      RouterLink(:to="{ name: 'sign_up' }")
+        BaseButton(link fullwidth) Sign Up
 </template>

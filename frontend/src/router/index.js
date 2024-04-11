@@ -16,6 +16,26 @@ const router = createRouter({
       component: () => import('@/views/login.vue'),
       meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
     },
+    {
+      path: '/sign_up',
+      name: 'sign_up',
+      component: () => import('@/views/sign_up.vue'),
+      meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
+    },
+    {
+      path: '/not_verified/:userId',
+      name: 'not_verified',
+      component: () => import('@/views/not_verified.vue'),
+      props: true,
+      meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
+    },
+    {
+      path: '/verify/:token',
+      name: 'verify',
+      component: () => import('@/views/verify.vue'),
+      props: true,
+      meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
+    },
   ],
 })
 
@@ -40,6 +60,7 @@ router.beforeEach((to, from, next) => {
   if (!user.isLoggedIn) {
     user
       .initialize()
+      .catch(() => { })
       .finally(() => handleBeforeEach({ to, from, next, user }))
   } else {
     handleBeforeEach({ to, from, next, user })
