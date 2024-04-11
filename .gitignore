@@ -1,6 +1,9 @@
 # Ignore bundler config.
 api/.bundle
 
+# Ignore irb history
+api/.irb_history
+
 # Ignore all logfiles and tempfiles.
 api/log/*
 api/tmp/*
