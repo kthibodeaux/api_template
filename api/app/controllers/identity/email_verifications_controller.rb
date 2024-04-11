@@ -20,6 +20,6 @@ class Identity::EmailVerificationsController < ApplicationController
   def set_user
     @user = User.find_by_token_for!(:email_verification, params[:sid])
   rescue StandardError
-    render json: { error: 'That email verification link is invalid' }, status: :bad_request
+    render json: { errors: ['That email verification link is invalid'] }, status: :bad_request
   end
 end

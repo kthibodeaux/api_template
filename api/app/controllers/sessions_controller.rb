@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
         user: user.as_json(only: USER_FIELDS)
       }, status: :created
     else
-      render json: { error: 'Invalid credentials' }, status: :unauthorized
+      render json: { errors: ['Invalid credentials'] }, status: :unauthorized
     end
   end
 

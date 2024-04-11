@@ -19,8 +19,8 @@ const login = () => {
     .then(() => {
       router.push('/')
     })
-    .catch((errorMessage) => {
-      error.value = errorMessage
+    .catch((errors) => {
+      error.value = errors.join()
     })
 }
 </script>
