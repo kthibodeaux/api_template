@@ -2,13 +2,12 @@
 import endpoints from '@/lib/endpoints'
 import router from '@/router'
 import runQuery from '@/lib/run_query'
+import { errorToast, successToast } from '@/lib/toasts'
 import { onMounted, ref } from 'vue'
 
 const props = defineProps({
   token: { type: String, required: true },
 })
-
-const error = ref(null)
 
 const isLoading = ref(true)
 onMounted(() => {
@@ -16,13 +15,14 @@ onMounted(() => {
     endpoint: endpoints.users.verify(props.token),
   })
     .then(() => {
-      router.push({ name: 'sign_in' })
+      successToast('Verification successful')
     })
     .catch(errors => {
-      error.value = errors.join()
+      errorToast(errors.join())
     })
     .finally(() => {
       isLoading.value = false
+      router.push({ name: 'sign_in' })
     })
 })
 </script>
@@ -36,8 +36,6 @@ section.section
         template(v-if="isLoading")
           p Verifying...
         template(v-else)
-          p(v-if="error") {{error}}
-          hr
           RouterLink(:to="{ name: 'sign_in' }")
             BaseButton(link fullwidth) Back to Sign In
 </template>

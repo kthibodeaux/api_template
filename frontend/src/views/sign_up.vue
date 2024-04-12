@@ -2,12 +2,12 @@
 import router from '@/router'
 import endpoints from '@/lib/endpoints'
 import runMutation from '@/lib/run_mutation'
+import { errorToast } from '@/lib/toasts'
 import { ref } from 'vue'
 
 const email = ref('')
 const password = ref('')
 const passwordConfirmation = ref('')
-const error = ref(null)
 
 const passwordValidation = () => {
   if (password.value !== passwordConfirmation.value) {
@@ -30,7 +30,7 @@ const signup = () => {
       router.push({ name: 'not_verified', params: { userId: data.user.id } })
     })
     .catch(errors => {
-      error.value = errors.join()
+      errorToast(errors.join())
     })
 }
 </script>
@@ -40,7 +40,7 @@ section.section
   .columns.is-centered
     .column.is-half
       h1.title.has-text-centered Sign Up
-      BaseForm(@submit="signup" :error="error")
+      BaseForm(@submit="signup")
         BaseInput(
           v-model="email"
           type="email"
