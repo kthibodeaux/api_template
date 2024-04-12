@@ -55,9 +55,9 @@ export const useUserStore = defineStore('userStore', () => {
     })
   }
 
-  const logout = function() {
+  const signOut = function() {
     runMutation({
-      endpoint: endpoints.users.logout(state.value.sessionId),
+      endpoint: endpoints.signOut(state.value.sessionId),
       method: 'delete',
     })
       .finally(() => {
@@ -73,8 +73,8 @@ export const useUserStore = defineStore('userStore', () => {
   return {
     initialize,
     isLoggedIn,
-    logout,
     signIn,
+    signOut,
     state,
   }
 })
