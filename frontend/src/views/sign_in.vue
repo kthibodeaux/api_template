@@ -1,12 +1,12 @@
 <script setup>
 import router from '@/router'
+import { errorToast } from '@/lib/toasts'
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 
 const email = ref('')
 const password = ref('')
 const rememberMe = ref(false)
-const error = ref(null)
 
 const user = useUserStore()
 
@@ -24,7 +24,7 @@ const signIn = () => {
       }
     })
     .catch(errors => {
-      error.value = errors.join()
+      errorToast(errors.join())
     })
 }
 </script>
@@ -34,7 +34,7 @@ section.section
   .columns.is-centered
     .column.is-half
       h1.title.has-text-centered Sign In
-      BaseForm(@submit="signIn" :error="error")
+      BaseForm(@submit="signIn")
         BaseInput(
           v-model="email"
           type="email"
