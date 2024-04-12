@@ -10,8 +10,8 @@ const error = ref(null)
 
 const user = useUserStore()
 
-const login = () => {
-  user.login({
+const signIn = () => {
+  user.signIn({
     email: email.value,
     password: password.value,
     rememberMe: rememberMe.value,
@@ -33,8 +33,8 @@ const login = () => {
 section.section
   .columns.is-centered
     .column.is-half
-      h1.title.has-text-centered Login
-      BaseForm(@submit="login" :error="error")
+      h1.title.has-text-centered Sign In
+      BaseForm(@submit="signIn" :error="error")
         BaseInput(
           v-model="email"
           type="email"
@@ -48,7 +48,7 @@ section.section
           is-required
         ) Password
         BaseCheckbox(v-model="rememberMe") Remember Me
-        BaseSubmitButton Login
+        BaseSubmitButton Sign In
       hr
       RouterLink(:to="{ name: 'sign_up' }")
         BaseButton(link fullwidth) Sign Up

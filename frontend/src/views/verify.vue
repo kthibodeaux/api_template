@@ -16,7 +16,7 @@ onMounted(() => {
     endpoint: endpoints.users.verify(props.token),
   })
     .then(() => {
-      router.push({ name: 'login' })
+      router.push({ name: 'sign_in' })
     })
     .catch(errors => {
       error.value = errors.join()
@@ -38,6 +38,6 @@ section.section
         template(v-else)
           p(v-if="error") {{error}}
           hr
-          RouterLink(:to="{ name: 'login' }")
-            BaseButton(link fullwidth) Back to Login
+          RouterLink(:to="{ name: 'sign_in' }")
+            BaseButton(link fullwidth) Back to Sign In
 </template>

@@ -31,7 +31,7 @@ template(v-if="user.isLoggedIn")
                   | GoodJob
                   BaseIcon(icon="thumbs-up" left-padded)
                 hr.navbar-divider
-              a.navbar-item(@click="user.logout" href="#") Logout
+              a.navbar-item(@click="user.signOut" href="#") Sign Out
 
   .container
     slot

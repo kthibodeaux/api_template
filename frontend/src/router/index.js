@@ -11,9 +11,9 @@ const router = createRouter({
       component: () => import('@/views/home.vue'),
     },
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/views/login.vue'),
+      path: '/sign_in',
+      name: 'sign_in',
+      component: () => import('@/views/sign_in.vue'),
       meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
     },
     {
@@ -44,10 +44,10 @@ const handleBeforeEach = function({ to, next, user }) {
     console.log('Already logged in. Redirecting to root.')
     next('/')
   } else if (to.matched.every(record => record.meta.permitGuest !== true) && !user.isLoggedIn) {
-    console.log('Not logged in. Redirecting to login.')
-    next('/login')
+    console.log('Not logged in. Redirecting to sign in.')
+    next('/sign_in')
   } else if (to.matched.some(record => record.name === 'admin') && !user.state.value.isAdmin) {
-    console.log('You do not have permission to access the requested page. Redirecting to login.')
+    console.log('You do not have permission to access the requested page. Redirecting to sign in.')
     next('/')
   } else {
     next()

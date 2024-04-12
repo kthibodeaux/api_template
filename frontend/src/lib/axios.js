@@ -27,9 +27,9 @@ myAxios.interceptors.response.use(
         console.error('Unauthorized. Logging out')
 
         myAxios
-          .delete(endpoints.users.logout)
+          .delete(endpoints.signOut)
           .finally(() => {
-            user.logout()
+            user.signOut()
           })
       }
     } else if (error.response.status === 404) {
