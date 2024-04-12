@@ -37,10 +37,10 @@ export const useUserStore = defineStore('userStore', () => {
     })
   }
 
-  const login = function(credentials) {
+  const signIn = function(credentials) {
     return new Promise((resolve, reject) => {
       runMutation({
-        endpoint: endpoints.users.login,
+        endpoint: endpoints.signIn,
         data: { session: credentials },
       })
         .then(data => {
@@ -62,7 +62,7 @@ export const useUserStore = defineStore('userStore', () => {
     })
       .finally(() => {
         state.value = defaultState()
-        location.href = '/login'
+        location.href = '/sign_in'
       })
   }
 
@@ -73,8 +73,8 @@ export const useUserStore = defineStore('userStore', () => {
   return {
     initialize,
     isLoggedIn,
-    login,
     logout,
+    signIn,
     state,
   }
 })

@@ -37,6 +37,6 @@ section.section
         p.has-text-centered
           BaseButton(@click="sendValidationLink") Resend validation link
       hr
-      RouterLink(:to="{ name: 'login' }")
-        BaseButton(link fullwidth) Back to Login
+      RouterLink(:to="{ name: 'sign_in' }")
+        BaseButton(link fullwidth) Back to Sign In
 </template>

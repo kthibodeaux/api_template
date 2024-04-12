@@ -17,7 +17,7 @@ const passwordValidation = () => {
 
 const signup = () => {
   runMutation({
-    endpoint: endpoints.users.register,
+    endpoint: endpoints.signUp,
     data: {
       user: {
         email: email.value,
@@ -67,6 +67,6 @@ section.section
         ) Password Confirmation
         BaseSubmitButton Sign Up
       hr
-      RouterLink(:to="{ name: 'login' }")
-        BaseButton(link fullwidth) Back to Login
+      RouterLink(:to="{ name: 'sign_in' }")
+        BaseButton(link fullwidth) Back to Sign In
 </template>
