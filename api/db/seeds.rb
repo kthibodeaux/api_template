@@ -1,4 +1,11 @@
 # frozen_string_literal: true
 
-FactoryBot.create(:user, :admin, email: 'admin@example.com')
-FactoryBot.create(:user, email: 'user@example.com')
+ActiveRecord::Base.transaction do
+  ['common', Rails.env].each do |seedfile|
+    seed_file = "#{Rails.root}/db/seeds/#{seedfile}.rb"
+    if File.exist?(seed_file)
+      puts "Seeding data from file: #{seedfile}"
+      require seed_file
+    end
+  end
+end
