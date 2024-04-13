@@ -41,32 +41,33 @@ section.section
     .column.is-half
       h1.title.has-text-centered Sign Up
       BaseForm(@submit="signup")
-        BaseInput(
-          v-model="email"
-          type="email"
-          left-icon="mail"
-          is-required
-        ) Email Address
-        BaseInput(
-          v-model="password"
-          type="password"
-          left-icon="lock"
-          is-required
-          minlength="12"
-          :validation="passwordValidation"
-          v-model:validationWatch="passwordConfirmation"
-        ) Password
-        BaseInput(
-          v-model="passwordConfirmation"
-          type="password"
-          left-icon="lock"
-          is-required
-          minlength="12"
-          :validation="passwordValidation"
-          v-model:validationWatch="password"
-        ) Password Confirmation
-        BaseSubmitButton Sign Up
+        .block
+          BaseInput(
+            v-model="email"
+            type="email"
+            left-icon="mail"
+            is-required
+          ) Email Address
+          BaseInput(
+            v-model="password"
+            type="password"
+            left-icon="lock"
+            is-required
+            minlength="12"
+            :validation="passwordValidation"
+            v-model:validationWatch="passwordConfirmation"
+          ) Password
+          BaseInput(
+            v-model="passwordConfirmation"
+            type="password"
+            left-icon="lock"
+            is-required
+            minlength="12"
+            :validation="passwordValidation"
+            v-model:validationWatch="password"
+          ) Password Confirmation
+        .block
+          BaseSubmitButton Sign Up
       hr
-      RouterLink(:to="{ name: 'sign_in' }")
-        BaseButton(link fullwidth) Back to Sign In
+      RouterLink(:to="{ name: 'sign_in' }") Back to Sign In
 </template>

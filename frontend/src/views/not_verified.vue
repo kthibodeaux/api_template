@@ -27,15 +27,16 @@ const sendValidationLink = function() {
 section.section
   .columns.is-centered
     .column.is-half
-      h1.title.has-text-centered Verify
-      p Your account has been created, but you cannot log in until your email address is verified. Please check your email and click the link to verify your account.
-      template(v-if="isSent")
-        p.has-text-centered
-          BaseButton(disabled) Verification link sent
-      template(v-else)
-        p.has-text-centered
-          BaseButton(@click="sendValidationLink") Resend validation link
+      .block
+        h1.title.has-text-centered Verify
+        p Your account has been created, but you cannot log in until your email address is verified. Please check your email and click the link to verify your account.
+      .block
+        template(v-if="isSent")
+          p.has-text-centered
+            BaseButton(disabled) Verification link sent
+        template(v-else)
+          p.has-text-centered
+            BaseButton(@click="sendValidationLink") Resend validation link
       hr
-      RouterLink(:to="{ name: 'sign_in' }")
-        BaseButton(link fullwidth) Back to Sign In
+      RouterLink(:to="{ name: 'sign_in' }") Back to Sign In
 </template>

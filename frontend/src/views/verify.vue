@@ -36,6 +36,5 @@ section.section
         template(v-if="isLoading")
           p Verifying...
         template(v-else)
-          RouterLink(:to="{ name: 'sign_in' }")
-            BaseButton(link fullwidth) Back to Sign In
+          RouterLink(:to="{ name: 'sign_in' }") Back to Sign In
 </template>
