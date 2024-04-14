@@ -24,24 +24,24 @@ RSpec.describe 'Password Resets', type: :request do
       let(:user) { FactoryBot.create(:user, :not_verified) }
       let(:email) { user.email }
 
-      it 'sends a password reset email' do
+      it 'does not send a password reset email' do
         expect do
           post identity_password_reset_url, params: { email: }
         end.to_not(
           have_enqueued_job(ActionMailer::MailDeliveryJob)
         )
 
-        expect(response).to have_http_status(:bad_request)
+        expect(response).to have_http_status(:no_content)
       end
     end
 
     context 'email does not exist' do
-      let(:email) { user.email }
+      let(:email) { "x#{user.email}" }
 
-      it 'sends a password reset email' do
+      it 'does not send a password reset email' do
         expect do
           post identity_password_reset_url, params: { email: }
-        end.to(
+        end.to_not(
           have_enqueued_job(ActionMailer::MailDeliveryJob)
         )
 
@@ -68,12 +68,12 @@ RSpec.describe 'Password Resets', type: :request do
     context 'invalid token' do
       let(:email) { Faker::Internet.email }
 
-      it 'sends a password reset email' do
-        expect do
-          post identity_password_reset_url, params: { email: }
-        end.to_not(
-          have_enqueued_job(ActionMailer::MailDeliveryJob)
-        )
+      it 'does not update the password' do
+        patch identity_password_reset_url, params: {
+          sid: "x#{sid}",
+          password: 'Secret1*3*5*',
+          password_confirmation: 'Secret1*3*5*'
+        }
 
         expect(response).to have_http_status(:bad_request)
       end
