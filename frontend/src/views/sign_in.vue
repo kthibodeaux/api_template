@@ -52,5 +52,9 @@ section.section
         .block
           BaseSubmitButton Sign In
       hr
-      RouterLink(:to="{ name: 'sign_up' }") Sign Up
+      .level
+        .level-left
+          RouterLink(:to="{ name: 'sign_up' }") Sign Up
+        .level-right
+          RouterLink(:to="{ name: 'forgot_password' }") Forgot Password
 </template>

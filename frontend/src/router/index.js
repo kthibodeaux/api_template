@@ -23,6 +23,12 @@ const router = createRouter({
       meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
     },
     {
+      path: '/forgot_password',
+      name: 'forgot_password',
+      component: () => import('@/views/forgot_password.vue'),
+      meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
+    },
+    {
       path: '/not_verified/:userId',
       name: 'not_verified',
       component: () => import('@/views/not_verified.vue'),
