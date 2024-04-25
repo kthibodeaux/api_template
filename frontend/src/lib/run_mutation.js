@@ -33,6 +33,11 @@ export default function({ method = 'post', endpoint, data }) {
         .patch(endpoint, data)
         .then(success)
         .catch(failure)
+    } else if (method === 'put') {
+      axios
+        .put(endpoint, data)
+        .then(success)
+        .catch(failure)
     }
   })
 }
