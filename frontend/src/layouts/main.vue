@@ -1,12 +1,25 @@
 <script setup>
-import { ref } from 'vue'
+import endpoints from '@/lib/endpoints'
+import runQuery from '@/lib/run_query'
+import { watch, ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 
 const user = useUserStore()
 const isOpen = ref(false)
 
-const goodJobUrl = `${process.env.API_URL}/good_job`
-const railsAdminUrl = `${process.env.API_URL}/admin`
+const adminLinks = ref([])
+watch(
+  () => user.state.isAdmin,
+  (isAdmin) => {
+    if (adminLinks.value.length === 0 && isAdmin) {
+      runQuery({ endpoint: endpoints.admin.links })
+        .then(data => {
+          adminLinks.value = data
+        })
+    }
+  },
+  { immediate: true },
+)
 </script>
 
 <template lang="pug">
@@ -27,13 +40,10 @@ template(v-if="user.isLoggedIn")
           .navbar-item.has-dropdown.is-hoverable
             a.navbar-link {{user.state.email}}
             .navbar-dropdown
-              template(v-if="user.state.isAdmin")
-                a.navbar-item(:href="railsAdminUrl")
-                  | Rails Admin
-                  BaseIcon(icon="train" left-padded)
-                a.navbar-item(:href="goodJobUrl")
-                  | GoodJob
-                  BaseIcon(icon="thumbs-up" left-padded)
+              template(v-if="adminLinks.length > 0")
+                a.navbar-item(v-for="adminLink in adminLinks" :href="adminLink.url" :key="adminLink.name")
+                  | {{adminLink.name}}
+                  BaseIcon(:icon="adminLink.icon" left-padded)
                 hr.navbar-divider
               a.navbar-item(@click="user.signOut" href="#") Sign Out
 

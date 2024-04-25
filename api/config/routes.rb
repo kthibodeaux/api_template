@@ -7,12 +7,16 @@ Rails.application.routes.draw do
 
   mount GoodJob::Engine => 'good_job'
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
 
   post 'sign_in', to: 'sessions#create'
   post 'sign_up', to: 'registrations#create'
 
   resources :sessions, only: %i[index show destroy]
+
+  namespace :admin do
+    resources :links, only: :index
+  end
 
   namespace :identity do
     resource :current, only: %i[show]

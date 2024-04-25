@@ -1,4 +1,7 @@
 export default {
+  admin: {
+    links: '/admin/links',
+  },
   signIn: '/sign_in',
   signOut: (id) => `/sessions/${id}`,
   signUp: '/sign_up',
