@@ -1,7 +1,7 @@
 <script setup>
 import endpoints from '@/lib/endpoints'
 import router from '@/router'
-import runQuery from '@/lib/run_query'
+import runMutation from '@/lib/run_mutation'
 import { errorToast, successToast } from '@/lib/toasts'
 import { onMounted, ref } from 'vue'
 
@@ -11,8 +11,12 @@ const props = defineProps({
 
 const isLoading = ref(true)
 onMounted(() => {
-  runQuery({
-    endpoint: endpoints.users.verify(props.token),
+  runMutation({
+    endpoint: endpoints.users.verify,
+    method: 'patch',
+    data: {
+      sid: props.token,
+    },
   })
     .then(() => {
       successToast('Verification successful')

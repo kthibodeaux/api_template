@@ -32,7 +32,7 @@ const resetPassword = () => {
       successToast('Your password has been updated. You may now sign in.')
       router.push({ name: 'sign_in' })
     })
-    .catch((e) => {
+    .catch(() => {
       errorToast('Something went wrong')
     })
 }

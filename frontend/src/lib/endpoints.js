@@ -4,7 +4,7 @@ export default {
   signUp: '/sign_up',
   users: {
     current: '/identity/current',
-    verify: (token) => `/identity/email_verification?sid=${token}`,
+    verify: '/identity/email_verification',
     resendVerification: (id) => `/identity/email_verification?uid=${id}`,
     sendPasswordReset: '/identity/password_reset',
     resetPassword: '/identity/password_reset',
