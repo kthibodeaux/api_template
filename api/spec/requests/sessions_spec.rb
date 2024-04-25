@@ -84,7 +84,7 @@ RSpec.describe 'Sessions', type: :request do
         it 'does not sign in' do
           post(sign_in_url, params:)
 
-          expect(response).to have_http_status(:ok)
+          expect(response).to have_http_status(:unauthorized)
         end
       end
     end
