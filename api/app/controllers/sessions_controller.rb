@@ -2,8 +2,8 @@
 
 class SessionsController < ApplicationController
   COOKIE_NAME = :session_id
-  SESSION_FIELDS = %i[id]
-  USER_FIELDS = %i[email is_admin]
+  SESSION_FIELDS = %i[id].freeze
+  USER_FIELDS = %i[email is_admin].freeze
 
   skip_before_action :authenticate, only: :create
   skip_after_action :verify_authorized, only: :create
