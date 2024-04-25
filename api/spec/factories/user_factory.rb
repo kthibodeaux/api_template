@@ -21,6 +21,7 @@ end
 # Table name: users
 #
 #  id              :uuid             not null, primary key
+#  deactivated_at  :datetime
 #  email           :string           not null
 #  is_admin        :boolean          default(FALSE), not null
 #  password_digest :string           not null
