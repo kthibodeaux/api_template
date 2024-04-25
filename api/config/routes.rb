@@ -14,6 +14,10 @@ Rails.application.routes.draw do
 
   resources :sessions, only: %i[index show destroy]
 
+  namespace :admin do
+    resources :links, only: :index
+  end
+
   namespace :identity do
     resource :current, only: %i[show]
     resource :attributes, only: %i[edit update]
