@@ -7,5 +7,6 @@ export default {
     verify: (token) => `/identity/email_verification?sid=${token}`,
     resendVerification: (id) => `/identity/email_verification?uid=${id}`,
     sendPasswordReset: '/identity/password_reset',
+    resetPassword: '/identity/password_reset',
   },
 }
