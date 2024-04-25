@@ -6,6 +6,7 @@ const user = useUserStore()
 const isOpen = ref(false)
 
 const goodJobUrl = `${process.env.API_URL}/good_job`
+const railsAdminUrl = `${process.env.API_URL}/admin`
 </script>
 
 <template lang="pug">
@@ -27,6 +28,9 @@ template(v-if="user.isLoggedIn")
             a.navbar-link {{user.state.email}}
             .navbar-dropdown
               template(v-if="user.state.isAdmin")
+                a.navbar-item(:href="railsAdminUrl")
+                  | Rails Admin
+                  BaseIcon(icon="train" left-padded)
                 a.navbar-item(:href="goodJobUrl")
                   | GoodJob
                   BaseIcon(icon="thumbs-up" left-padded)
