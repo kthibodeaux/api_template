@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   def create
     user = User.authenticate_by(email: session_params[:email], password: session_params[:password])
 
-    if user
+    if user&.active?
       if user.verified?
         session = authorize Session.new(user:, expires_at: expire_time)
         session.save!

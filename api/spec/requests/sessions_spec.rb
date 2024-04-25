@@ -57,17 +57,31 @@ RSpec.describe 'Sessions', type: :request do
       end
 
       context 'user is verified' do
-        it 'signs in' do
-          post(sign_in_url, params:)
+        context 'user is active' do
+          it 'signs in' do
+            post(sign_in_url, params:)
 
-          expect(response).to have_http_status(:created)
+            expect(response).to have_http_status(:created)
+          end
+        end
+
+        context 'user is not active' do
+          before do
+            user.deactivate!
+          end
+
+          it 'does not sign in' do
+            post(sign_in_url, params:)
+
+            expect(response).to have_http_status(:unauthorized)
+          end
         end
       end
 
       context 'user is not verified' do
         let(:user) { FactoryBot.create(:user, :not_verified) }
 
-        it 'signs in' do
+        it 'does not sign in' do
           post(sign_in_url, params:)
 
           expect(response).to have_http_status(:ok)
@@ -82,7 +96,7 @@ RSpec.describe 'Sessions', type: :request do
         }
       end
 
-      it 'signs in' do
+      it 'does not sign in' do
         post(sign_in_url, params:)
 
         expect(response).to have_http_status(:unauthorized)
