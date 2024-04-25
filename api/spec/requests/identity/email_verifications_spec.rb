@@ -6,10 +6,10 @@ RSpec.describe 'Email Verifications', type: :request do
   let(:user) { FactoryBot.create(:user, :not_verified) }
   let!(:sid) { user.generate_token_for(:email_verification) }
 
-  describe '#show' do
+  describe '#update' do
     context 'valid token' do
       it 'verifies the user' do
-        get identity_email_verification_url, params: { sid: }
+        patch identity_email_verification_url, params: { sid: }
 
         expect(user.reload.verified?).to eq(true)
         expect(response).to have_http_status(:no_content)
@@ -20,7 +20,7 @@ RSpec.describe 'Email Verifications', type: :request do
       before { travel 3.days }
 
       it 'does not verify the user' do
-        get identity_email_verification_url, params: { sid: }
+        patch identity_email_verification_url, params: { sid: }
 
         expect(user.reload.verified?).to eq(false)
         expect(response).to have_http_status(:bad_request)
