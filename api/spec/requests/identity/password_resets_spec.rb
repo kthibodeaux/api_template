@@ -9,14 +9,32 @@ RSpec.describe 'Password Resets', type: :request do
     context 'email is verified' do
       let(:email) { user.email }
 
-      it 'sends a password reset email' do
-        expect do
-          post identity_password_reset_url, params: { email: }
-        end.to(
-          have_enqueued_job(ActionMailer::MailDeliveryJob)
-        )
+      context 'user is active' do
+        it 'sends a password reset email' do
+          expect do
+            post identity_password_reset_url, params: { email: }
+          end.to(
+            have_enqueued_job(ActionMailer::MailDeliveryJob)
+          )
 
-        expect(response).to have_http_status(:no_content)
+          expect(response).to have_http_status(:no_content)
+        end
+      end
+
+      context 'user is not active' do
+        before do
+          user.deactivate!
+        end
+
+        it 'does not send a password reset email' do
+          expect do
+            post identity_password_reset_url, params: { email: }
+          end.to_not(
+            have_enqueued_job(ActionMailer::MailDeliveryJob)
+          )
+
+          expect(response).to have_http_status(:no_content)
+        end
       end
     end
 

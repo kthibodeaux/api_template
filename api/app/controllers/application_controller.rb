@@ -19,7 +19,7 @@ class ApplicationController < ActionController::API
     session = Session.find_signed(cookies.signed[SessionsController::COOKIE_NAME])
 
     if session
-      if session.expired?
+      if session.expired? || !session.user.active?
         session.destroy
         cookies.delete SessionsController::COOKIE_NAME
 

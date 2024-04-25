@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include Deactivatable
+
   has_secure_password
 
   generates_token_for :email_verification, expires_in: 2.days do
@@ -48,6 +50,7 @@ end
 # Table name: users
 #
 #  id              :uuid             not null, primary key
+#  deactivated_at  :datetime
 #  email           :string           not null
 #  is_admin        :boolean          default(FALSE), not null
 #  password_digest :string           not null

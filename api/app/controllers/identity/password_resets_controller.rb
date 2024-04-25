@@ -7,7 +7,7 @@ class Identity::PasswordResetsController < ApplicationController
   before_action :set_user, only: :update
 
   def create
-    user = User.find_by(email: params[:email], verified: true)
+    user = User.find_by(email: params[:email], verified: true, deactivated_at: nil)
 
     UserMailer.with(user:).password_reset.deliver_later if user
 
