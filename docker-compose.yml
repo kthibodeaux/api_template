@@ -4,7 +4,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     expose:
-      - "5432"
+      - 5432
     environment:
       POSTGRES_HOST_AUTH_METHOD: "trust"
       PGUSER: "postgres"
@@ -21,8 +21,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/api/Dockerfile
-    ports:
-      - "30001:3000"
+    expose:
+      - 3000
     healthcheck:
       test: [ "CMD", "curl", "--fail", "http://127.0.0.1:3000/health" ]
       start_period: 1m
@@ -35,7 +35,7 @@ services:
       - ./docker/api/entrypoint.sh:/home/rails/entrypoint.sh
     environment:
       RESEED: ${RESEED:-false}
-      FRONTEND_URL: http://localhost:30000
+      FRONTEND_URL: http://localhost
     depends_on:
       db:
         condition: service_healthy
@@ -59,7 +59,7 @@ services:
       - ./api:/home/rails/app
       - ./docker/api/entrypoint-worker.sh:/home/rails/entrypoint.sh
     environment:
-      FRONTEND_URL: http://localhost:30000
+      FRONTEND_URL: http://localhost
     depends_on:
       api:
         condition: service_healthy
@@ -72,8 +72,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/frontend/Dockerfile
-    ports:
-      - "30000:5173"
+    expose:
+      - 5173
     healthcheck:
       test: [ "CMD", "curl", "--fail", "http://127.0.0.1:5173" ]
       interval: 10s
@@ -83,11 +83,26 @@ services:
       - ./frontend:/home/node/app
       - ./docker/frontend/entrypoint.sh:/home/node/entrypoint.sh
     environment:
-      API_URL: http://localhost:30001
+      API_URL: http://localhost/api
+    command: /home/node/entrypoint.sh
+
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    healthcheck:
+      test: ["CMD", "service", "nginx", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     depends_on:
       api:
         condition: service_healthy
-    command: /home/node/entrypoint.sh
+      frontend:
+        condition: service_healthy
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
 
 volumes:
   rails_bundle:
