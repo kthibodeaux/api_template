@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/user'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  linkActiveClass: 'is-selected',
+  linkActiveClass: 'is-active',
   routes: [
     {
       path: '/',
