@@ -54,13 +54,13 @@ const router = createRouter({
 
 const handleBeforeEach = function({ to, next, user }) {
   if (to.matched.every(record => record.meta.onlyPermitGuest === true) && user.isLoggedIn) {
-    console.log('Already logged in. Redirecting to root.')
+    console.log('Already logged in. Redirecting to home.')
     next('/')
   } else if (to.matched.every(record => record.meta.permitGuest !== true) && !user.isLoggedIn) {
     console.log('Not logged in. Redirecting to sign in.')
     next('/sign_in')
   } else if (to.matched.some(record => record.name === 'admin') && !user.state.value.isAdmin) {
-    console.log('You do not have permission to access the requested page. Redirecting to sign in.')
+    console.log('You do not have permission to access the requested page. Redirecting to home.')
     next('/')
   } else {
     next()
