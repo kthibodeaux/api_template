@@ -2,3 +2,7 @@
   --bulma-section-padding: 1rem 1.5em;
   --bulma-section-padding-desktop: 1rem 1.5em;
 }
+
+.panel-heading {
+  --bulma-panel-heading-padding: 15px;
+}
