@@ -49,6 +49,16 @@ const router = createRouter({
       props: true,
       meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
     },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('@/views/settings/index.vue'),
+      redirect: { name: 'settings__email' },
+      children: [
+        { name: 'settings__email', path: 'email', component: import('@/views/settings/email.vue') },
+        { name: 'settings__change_password', path: 'change_password', component: import('@/views/settings/change_password.vue') },
+      ],
+    },
   ],
 })
 

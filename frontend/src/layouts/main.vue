@@ -45,6 +45,10 @@ template(v-if="user.isLoggedIn")
                   BaseIcon(:icon="adminLink.icon" right-padded)
                   | {{adminLink.name}}
                 hr.navbar-divider
+              RouterLink.navbar-item(:to="{ name: 'settings' }")
+                BaseIcon(icon="settings" right-padded)
+                | Settings
+              hr.navbar-divider
               a.navbar-item(@click="user.signOut" href="#")
                 BaseIcon(icon="log-out" right-padded)
                 | Sign Out
