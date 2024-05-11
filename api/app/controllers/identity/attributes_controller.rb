@@ -19,8 +19,7 @@ module Identity
     end
 
     def user_params
-      params.permit(:email, :password, :password_confirmation,
-                    :password_challenge).with_defaults(password_challenge: '')
+      params.permit(:email, :password, :password_confirmation)
     end
 
     def render_show
