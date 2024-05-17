@@ -1,6 +1,11 @@
 require:
   - ./lib/cops/require_uuid_for_migration_references.rb
 
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'db/schema.rb'
+
 Style/Documentation:
   Enabled: false
 
