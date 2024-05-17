@@ -1,5 +1,7 @@
 require:
   - ./lib/cops/require_uuid_for_migration_references.rb
+  - ./lib/cops/safety_assured.rb
+  - ./lib/cops/no_instance_variables_in_specs.rb
 
 AllCops:
   NewCops: enable
