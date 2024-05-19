@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   namespace :identity do
     resource :current, only: %i[show]
-    resource :email, only: %i[update]
+    resource :email, only: %i[create update]
     resource :email_verification, only: %i[create update]
     resource :password, only: %i[update]
     resource :password_reset, only: %i[create update]
