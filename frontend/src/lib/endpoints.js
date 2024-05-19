@@ -10,6 +10,8 @@ export default {
     resendVerification: (id) => `/identity/email_verification?uid=${id}`,
     resetPassword: '/identity/password_reset',
     sendPasswordReset: '/identity/password_reset',
+    sessions: '/sessions',
+    signOutSession: (id) => `/sessions/${id}`,
     updateEmail: '/identity/email',
     updatePassword: '/identity/password',
     verify: '/identity/email_verification',

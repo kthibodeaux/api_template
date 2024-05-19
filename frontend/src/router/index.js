@@ -60,9 +60,10 @@ const router = createRouter({
       path: '/settings',
       name: 'settings',
       component: () => import('@/views/settings/index.vue'),
-      redirect: { name: 'settings__email' },
+      redirect: { name: 'settings__active_sessions' },
       children: [
-        { name: 'settings__email', path: 'email', component: import('@/views/settings/email.vue') },
+        { name: 'settings__active_sessions', path: 'active_sessions', component: import('@/views/settings/active_sessions.vue') },
+        { name: 'settings__change_email', path: 'change_email', component: import('@/views/settings/change_email.vue') },
         { name: 'settings__change_password', path: 'change_password', component: import('@/views/settings/change_password.vue') },
       ],
     },

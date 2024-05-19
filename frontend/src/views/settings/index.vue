@@ -7,10 +7,14 @@
     section.section
       article.panel.is-link
         p.panel-heading Access
-        RouterLink.panel-block(:to="{ name: 'settings__email' }")
+        RouterLink.panel-block(:to="{ name: 'settings__active_sessions' }")
+          span.panel-icon
+            BaseIcon(icon="book-stack")
+          | Active Sessions
+        RouterLink.panel-block(:to="{ name: 'settings__change_email' }")
           span.panel-icon
             BaseIcon(icon="mail")
-          | Email
+          | Change Email
         RouterLink.panel-block(:to="{ name: 'settings__change_password' }")
           span.panel-icon
             BaseIcon(icon="lock")
