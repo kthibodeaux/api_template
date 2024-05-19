@@ -11,6 +11,7 @@ const props = defineProps({
   leftIcon: { type: String, default: null },
   type: { type: String, default: 'text' },
   validation: { type: Function, default: null },
+  disabled: { type: Boolean, default: false },
 })
 
 const additionalClasses = {
@@ -36,6 +37,7 @@ const { errorMessage, showError, updateValidity } = useValidation({
       @focus="updateValidity"
       @input="updateValidity"
       :class="{ 'is-danger': showError }"
+      :disabled="disabled"
       :minlength="minlength"
       :required="isRequired"
       :type="type"
