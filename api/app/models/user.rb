@@ -41,6 +41,7 @@ end
 #  id              :uuid             not null, primary key
 #  deactivated_at  :datetime
 #  email           :string           not null
+#  email_change_to :string
 #  is_admin        :boolean          default(FALSE), not null
 #  password_digest :string           not null
 #  verified        :boolean          default(FALSE), not null
