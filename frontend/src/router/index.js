@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/user'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  linkActiveClass: 'is-selected',
+  linkActiveClass: 'is-active',
   routes: [
     {
       path: '/',
@@ -43,24 +43,41 @@ const router = createRouter({
       meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
     },
     {
+      path: '/update_email/:token',
+      name: 'update_email',
+      component: () => import('@/views/update_email.vue'),
+      props: true,
+      meta: { layout: 'guest', permitGuest: true },
+    },
+    {
       path: '/verify/:token',
       name: 'verify',
       component: () => import('@/views/verify.vue'),
       props: true,
       meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
     },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('@/views/settings/index.vue'),
+      redirect: { name: 'settings__email' },
+      children: [
+        { name: 'settings__email', path: 'email', component: import('@/views/settings/email.vue') },
+        { name: 'settings__change_password', path: 'change_password', component: import('@/views/settings/change_password.vue') },
+      ],
+    },
   ],
 })
 
 const handleBeforeEach = function({ to, next, user }) {
   if (to.matched.every(record => record.meta.onlyPermitGuest === true) && user.isLoggedIn) {
-    console.log('Already logged in. Redirecting to root.')
+    console.log('Already logged in. Redirecting to home.')
     next('/')
   } else if (to.matched.every(record => record.meta.permitGuest !== true) && !user.isLoggedIn) {
     console.log('Not logged in. Redirecting to sign in.')
     next('/sign_in')
   } else if (to.matched.some(record => record.name === 'admin') && !user.state.value.isAdmin) {
-    console.log('You do not have permission to access the requested page. Redirecting to sign in.')
+    console.log('You do not have permission to access the requested page. Redirecting to home.')
     next('/')
   } else {
     next()

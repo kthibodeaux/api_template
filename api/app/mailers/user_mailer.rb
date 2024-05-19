@@ -14,4 +14,11 @@ class UserMailer < ApplicationMailer
 
     mail to: @user.email, subject: 'Verify your email'
   end
+
+  def change_email
+    @user = params[:user]
+    @signed_id = @user.generate_token_for(:change_email)
+
+    mail to: @user.email_change_to, subject: 'Verify your email change'
+  end
 end

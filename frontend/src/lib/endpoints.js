@@ -7,9 +7,11 @@ export default {
   signUp: '/sign_up',
   users: {
     current: '/identity/current',
-    verify: '/identity/email_verification',
     resendVerification: (id) => `/identity/email_verification?uid=${id}`,
-    sendPasswordReset: '/identity/password_reset',
     resetPassword: '/identity/password_reset',
+    sendPasswordReset: '/identity/password_reset',
+    updateEmail: '/identity/email',
+    updatePassword: '/identity/password',
+    verify: '/identity/email_verification',
   },
 }
