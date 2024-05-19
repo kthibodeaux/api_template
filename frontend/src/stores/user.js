@@ -66,13 +66,13 @@ export const useUserStore = defineStore('userStore', () => {
       })
   }
 
-  const isLoggedIn = computed(() => {
+  const isSignedIn = computed(() => {
     return !!state.value.sessionId
   })
 
   return {
     initialize,
-    isLoggedIn,
+    isSignedIn,
     signIn,
     signOut,
     state,

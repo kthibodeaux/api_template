@@ -37,7 +37,7 @@ const signOut = (sessionId) => {
 section.section
   h1.title Active Sessions
   .block
-    p You are logged in from the following devices. If you do not recognize any, you can sign it out and reset your password.
+    p You are signed in from the following devices. If you do not recognize any, you can sign it out and reset your password.
   .block
     .card(v-for="session in sessions" :key="session.id")
       .card-content

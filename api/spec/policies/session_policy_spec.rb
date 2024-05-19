@@ -25,15 +25,15 @@ RSpec.describe SessionPolicy do
   end
 
   permissions :create? do
-    context 'a user is logged in' do
-      include_context 'stub logged in user'
+    context 'a user is signed in' do
+      include_context 'stub signed in user'
 
       specify do
         expect(subject).to_not permit(user, session)
       end
     end
 
-    context 'a user is not logged in' do
+    context 'a user is not signed in' do
       specify do
         expect(subject).to permit(user, session)
       end

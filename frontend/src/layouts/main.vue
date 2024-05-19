@@ -23,7 +23,7 @@ watch(
 </script>
 
 <template lang="pug">
-template(v-if="user.isLoggedIn")
+template(v-if="user.isSignedIn")
   .container
     nav.navbar(role="navigation" aria-label="main navigation")
       .navbar-brand

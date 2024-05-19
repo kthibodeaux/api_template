@@ -8,7 +8,7 @@ RSpec.describe 'Current user', type: :request do
   describe '#show' do
     let!(:sid) { user.generate_token_for(:email_verification) }
 
-    context 'user is logged in' do
+    context 'user is signed in' do
       let(:body) { JSON.parse(response.body) }
       before { sign_in_as(user) }
 

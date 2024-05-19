@@ -23,12 +23,12 @@ class ApplicationController < ActionController::API
         session.destroy
         cookies.delete SessionsController::COOKIE_NAME
 
-        render json: { error: 'You must be logged in' }, status: :unauthorized
+        render json: { error: 'You must be signed in' }, status: :unauthorized
       else
         Current.session = session
       end
     else
-      render json: { error: 'You must be logged in' }, status: :unauthorized
+      render json: { error: 'You must be signed in' }, status: :unauthorized
     end
   end
 

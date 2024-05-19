@@ -23,8 +23,8 @@ myAxios.interceptors.response.use(
     if (!error.response) {
       console.error(error.message)
     } else if (error.response.status === 401) {
-      if (user.isLoggedIn) {
-        console.error('Unauthorized. Logging out')
+      if (user.isSignedIn) {
+        console.error('Unauthorized. Signing out')
 
         myAxios
           .delete(endpoints.signOut)
