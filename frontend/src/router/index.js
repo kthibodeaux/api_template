@@ -43,6 +43,13 @@ const router = createRouter({
       meta: { layout: 'guest', permitGuest: true, onlyPermitGuest: true },
     },
     {
+      path: '/update_email/:token',
+      name: 'update_email',
+      component: () => import('@/views/update_email.vue'),
+      props: true,
+      meta: { layout: 'guest', permitGuest: true },
+    },
+    {
       path: '/verify/:token',
       name: 'verify',
       component: () => import('@/views/verify.vue'),
