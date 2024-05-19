@@ -30,3 +30,10 @@ This template repo is a starting point for a Ruby on Rails API with a Vue.js fro
 ## Getting Production Ready
 
 * Setup mail (smtp or gem)
+
+
+## Screenshots
+
+![Sign In](readme-images/sign-in.png)
+
+![Active Sessions](readme-images/active-sessions.png)
