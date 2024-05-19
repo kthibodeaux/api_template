@@ -1,6 +1,5 @@
 <script setup>
 import endpoints from '@/lib/endpoints'
-import router from '@/router'
 import runMutation from '@/lib/run_mutation'
 import runQuery from '@/lib/run_query'
 import { errorToast, successToast } from '@/lib/toasts'
