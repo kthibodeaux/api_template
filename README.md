@@ -21,6 +21,7 @@ This template repo is a starting point for a Ruby on Rails API with a Vue.js fro
 ### Frontend
 
 * CSS Framework (bulma)
+* Icons (iconoir)
 * Vue.js
 * Pinia
 * Custom validation framework
