@@ -51,6 +51,9 @@ class SessionsController < ApplicationController
 
   def destroy
     @session.destroy
+
+    return unless @session.id == Current.session.id
+
     cookies.delete COOKIE_NAME
   end
 
