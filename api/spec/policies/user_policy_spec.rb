@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe UserPolicy do
   subject { described_class }
-  let(:user) { FactoryBot.create(:user) }
-  let(:other_user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
 
   permissions :update? do
     specify do

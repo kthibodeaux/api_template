@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Sessions', type: :request do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   describe '#index' do
     before { sign_in_as(user) }
@@ -79,7 +79,7 @@ RSpec.describe 'Sessions', type: :request do
       end
 
       context 'user is not verified' do
-        let(:user) { FactoryBot.create(:user, :not_verified) }
+        let(:user) { create(:user, :not_verified) }
 
         it 'does not sign in' do
           post(sign_in_url, params:)

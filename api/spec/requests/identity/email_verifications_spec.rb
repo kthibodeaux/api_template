@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Email Verifications', type: :request do
-  let(:user) { FactoryBot.create(:user, :not_verified) }
+  let(:user) { create(:user, :not_verified) }
   let!(:sid) { user.generate_token_for(:email_verification) }
 
   describe '#update' do

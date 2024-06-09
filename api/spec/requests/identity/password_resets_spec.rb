@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Password Resets', type: :request do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   describe '#create' do
     context 'email is verified' do
@@ -39,7 +39,7 @@ RSpec.describe 'Password Resets', type: :request do
     end
 
     context 'email is not verified' do
-      let(:user) { FactoryBot.create(:user, :not_verified) }
+      let(:user) { create(:user, :not_verified) }
       let(:email) { user.email }
 
       it 'does not send a password reset email' do

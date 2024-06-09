@@ -7,8 +7,8 @@ RSpec.describe DestroyExpiredSessionsJob, type: :job do
 
   describe '#perform' do
     before do
-      FactoryBot.create(:session)
-      FactoryBot.create(:session, :expired)
+      create(:session)
+      create(:session, :expired)
     end
 
     it 'deletes expired jobs' do

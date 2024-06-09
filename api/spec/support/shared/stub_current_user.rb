@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.shared_context 'stub signed in user' do
   before do
-    Current.session = FactoryBot.create(:session, user:)
+    Current.session = create(:session, user:)
   end
 
   after do

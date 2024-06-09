@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Updating email address', type: :request do
   describe '#create' do
-    let(:user) { FactoryBot.create(:user) }
+    let(:user) { create(:user) }
     let(:new_email) { Faker::Internet.email }
 
     before { sign_in_as(user) }
@@ -31,7 +31,7 @@ RSpec.describe 'Updating email address', type: :request do
 
   describe '#update' do
     let!(:sid) { user.generate_token_for(:change_email) }
-    let(:user) { FactoryBot.create(:user, email_change_to: new_email) }
+    let(:user) { create(:user, email_change_to: new_email) }
     let(:new_email) { Faker::Internet.email }
 
     it 'updates User#email' do

@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe SessionPolicy do
   subject { described_class }
-  let(:user) { FactoryBot.create(:user) }
-  let(:other_user) { FactoryBot.create(:user) }
-  let(:session) { FactoryBot.build(:session, user:) }
+  let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
+  let(:session) { build(:session, user:) }
 
   permissions :index? do
     specify do

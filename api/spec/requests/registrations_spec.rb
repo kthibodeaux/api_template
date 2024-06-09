@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Registrations', type: :request do
   describe '#create' do
-    let(:email) { FactoryBot.build(:user).email }
+    let(:email) { build(:user).email }
     let(:password) { 'Secret1*3*5*' }
     let(:password_confirmation) { password }
     let(:params) do

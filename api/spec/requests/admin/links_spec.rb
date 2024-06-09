@@ -7,7 +7,7 @@ RSpec.describe 'Admin Links', type: :request do
 
   describe '#index' do
     context 'user is an admin' do
-      let(:user) { FactoryBot.create(:user, :admin) }
+      let(:user) { create(:user, :admin) }
 
       it 'returns links' do
         get admin_links_url
@@ -18,7 +18,7 @@ RSpec.describe 'Admin Links', type: :request do
     end
 
     context 'user is not an admin' do
-      let(:user) { FactoryBot.create(:user) }
+      let(:user) { create(:user) }
 
       it 'is unauthorized' do
         get admin_links_url
