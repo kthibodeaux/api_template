@@ -4,9 +4,9 @@ module Admin
   class LinksController < AdminApplicationController
     def index
       if Rails.env.development?
-        render json: all_environment_links + development_environment_links
+        render json: Admin::LinkBlueprint.render(all_environment_links + development_environment_links)
       else
-        render json: all_environment_links
+        render json: Admin::LinkBlueprint.render(all_environment_links)
       end
     end
 
