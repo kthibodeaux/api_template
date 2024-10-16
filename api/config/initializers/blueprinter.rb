@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Blueprinter.configure do |config|
-  config.if = lambda do |field_name, object, _options|
+  config.if = lambda do |field_name, object, options|
     return true if options.fetch(:skip_authorization, false)
 
     key = object.object_id
