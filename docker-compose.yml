@@ -72,6 +72,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/frontend/Dockerfile
+      target: base
     expose:
       - 5173
     healthcheck:
