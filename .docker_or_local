@@ -1,2 +1,3 @@
 bundle=api
 yarn=frontend
+./bin/rails=api
