@@ -15,8 +15,8 @@ end
 #
 #  id         :uuid             not null, primary key
 #  action     :string           not null
-#  ip_address :string
 #  user_agent :string
+#  ip_address :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :uuid             not null
@@ -24,8 +24,4 @@ end
 # Indexes
 #
 #  index_events_on_user_id  (user_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (user_id => users.id)
 #

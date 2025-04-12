@@ -40,6 +40,8 @@ module Api
     # Automatically convert JSON between snake_case and camelCase
     config.middleware.use OliveBranch::Middleware, inflection: 'camel'
 
+    config.active_support.to_time_preserves_timezone = :zone
+
     # good_job config
     config.active_job.queue_adapter = :good_job
     ## Normally this would not be :external for :development, but our docker-compose
