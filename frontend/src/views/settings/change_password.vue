@@ -20,7 +20,7 @@ const updatePassword = () => {
     method: 'patch',
     data: {
       password: password.value,
-      passwordConfirmation: passwordConfirmation.value,
+      password_confirmation: passwordConfirmation.value,
     },
   })
     .then(() => {
