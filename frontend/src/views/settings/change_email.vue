@@ -12,7 +12,7 @@ const updateEmail = () => {
     endpoint: endpoints.users.updateEmail,
     method: 'post',
     data: {
-      emailChangeTo: email.value,
+      email_change_to: email.value,
     },
   })
     .then(() => {

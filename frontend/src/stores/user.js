@@ -18,7 +18,7 @@ export const useUserStore = defineStore('userStore', () => {
 
   function setState(data) {
     state.value.email = data.user.email
-    state.value.isAdmin = data.user.isAdmin
+    state.value.isAdmin = data.user.is_admin
     state.value.sessionId = data.session.id
   }
 

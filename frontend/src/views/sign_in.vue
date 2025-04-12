@@ -14,12 +14,12 @@ const signIn = () => {
   user.signIn({
     email: email.value,
     password: password.value,
-    rememberMe: rememberMe.value,
+    remember_me: rememberMe.value,
   })
     .then(data => {
       if (data?.session) {
         router.push('/')
-      } else if (data.errorId === 'not_verified') {
+      } else if (data.error_id === 'not_verified') {
         router.push({ name: 'not_verified', params: { userId: data.user.id } })
       }
     })

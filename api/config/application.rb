@@ -37,9 +37,6 @@ module Api
     # Allow controllers to use cookies
     config.middleware.use ActionDispatch::Cookies
 
-    # Automatically convert JSON between snake_case and camelCase
-    config.middleware.use OliveBranch::Middleware, inflection: 'camel'
-
     config.active_support.to_time_preserves_timezone = :zone
 
     # good_job config
