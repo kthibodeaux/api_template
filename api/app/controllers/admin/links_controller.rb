@@ -16,7 +16,6 @@ module Admin
 
     def all_environment_links
       [
-        Admin::Link.new(name: 'Rails Admin', url: rails_admin_url, icon: 'train'),
         Admin::Link.new(name: 'Good Job', url: good_job_url, icon: 'thumbs-up')
       ]
     end
