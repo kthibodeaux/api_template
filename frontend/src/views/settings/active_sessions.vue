@@ -42,12 +42,12 @@ section.section
       .card-content
         .level
           .left
-            .title.is-5 {{session.ipAddress}}
+            .title.is-5 {{session.ip_address}}
           .right
-            template(v-if="session.id == user.state.sessionId")
+            template(v-if="session.id == user.state.session_id")
               | This Device
             template(v-else)
               a(@click="signOut(session.id)" href="#") Sign Out
-        p {{session.userAgent}}
-        p Signed in since {{session.createdAt}}
+        p {{session.user_agent}}
+        p Signed in since {{session.created_at}}
 </template>

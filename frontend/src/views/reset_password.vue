@@ -25,7 +25,7 @@ const resetPassword = () => {
     data: {
       sid: props.token,
       password: password.value,
-      passwordConfirmation: passwordConfirmation.value,
+      password_confirmation: passwordConfirmation.value,
     },
   })
     .then(() => {

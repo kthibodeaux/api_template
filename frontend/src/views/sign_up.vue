@@ -22,7 +22,7 @@ const signup = () => {
       user: {
         email: email.value,
         password: password.value,
-        passwordConfirmation: passwordConfirmation.value,
+        password_confirmation: passwordConfirmation.value,
       },
     },
   })
